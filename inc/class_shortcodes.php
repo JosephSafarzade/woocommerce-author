@@ -25,6 +25,12 @@ class wooa_shortcodes
 
         add_shortcode ( 'wooa_show_author_products' , array($this,'wooa_show_author_product_render') );
 
+        add_shortcode ( 'wooa_show_author_country_name' , array($this,'wooa_show_author_country_name_render') );
+
+        add_shortcode ( 'wooa_show_author_city_name' , array($this,'wooa_show_author_city_name_render') );
+
+        add_shortcode ( 'wooa_show_author_country_flag' , array($this,'wooa_show_author_country_flag_render') );
+
     }
 
 
@@ -98,8 +104,43 @@ class wooa_shortcodes
 
         $wooa_author_products_ids = apply_filters('wooa_return_author_products_id' , $atts['author_id'] );
 
-
         do_action( 'wooa_show_author_products_container');
+
+    }
+
+
+
+
+    function wooa_show_author_country_name_render($atts) {
+
+        $atts = shortcode_atts( array(
+            'author_id' => '0',
+        ), $atts, 'wooa_show_author_country_name' );
+
+        echo apply_filters('wooa_return_author_country_name' , $atts['author_id'] );
+
+    }
+
+
+    function wooa_show_author_city_name_render($atts) {
+
+        $atts = shortcode_atts( array(
+            'author_id' => '0',
+        ), $atts, 'wooa_show_author_city_name' );
+
+        echo apply_filters('wooa_return_author_city_name' , $atts['author_id'] );
+
+    }
+
+
+
+    function wooa_show_author_country_flag_render($atts) {
+
+        $atts = shortcode_atts( array(
+            'author_id' => '0',
+        ), $atts, 'wooa_show_author_country_flag' );
+
+        echo apply_filters('wooa_show_author_country_flag' , $atts['author_id'] );
 
     }
 

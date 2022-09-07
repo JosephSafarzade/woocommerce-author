@@ -1,21 +1,28 @@
 .wooa-admin-input-container {
   margin-top: 30px;
-  padding-left: 10px; }
+  padding-left: 10px;
+  max-width: 350px; }
   .wooa-admin-input-container .wooa-admin-input-label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold; }
   .wooa-admin-input-container .wooa-admin-input.wooa-admin-input-text {
     border-radius: 20 !important;
-    min-width: 300px;
+    min-width: 325px;
     height: 39px; }
   .wooa-admin-input-container .wooa-admin-input.wooa-admin-input-textarea {
     border-radius: 10px !important;
-    min-width: 300px;
+    min-width: 325px;
     height: 200px; }
   .wooa-admin-input-container .wooa-admin-input.wooa-admin-input-select {
     min-width: 250px;
     height: 40px;
     margin-bottom: 30px; }
+  .wooa-admin-input-container .select2-container--default .select2-selection--single {
+    height: 40px; }
+  .wooa-admin-input-container .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 40px; }
+  .wooa-admin-input-container .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px; }
 
 /*# sourceMappingURL=admin-style.css.map */

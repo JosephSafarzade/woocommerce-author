@@ -107,6 +107,32 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
+                'type'=>'select',
+                'name'=>'wooa_author_country',
+                'class' => '',
+                'label'=>'Author Country',
+                'id' => 'wooa_author_country',
+                'value' => $values['wooa_author_country'][0] != '' ? $values['wooa_author_country'][0] : '',
+                'options' => wooa_core::return_all_country_names_for_admin_panel_input()
+            )
+        );
+
+
+        $this->wooa_admin_inputs->render_admin_input(
+            array(
+                'type'=>'textbox',
+                'name'=>'wooa_author_city',
+                'class' => '',
+                'label'=>'Author City',
+                'id' => 'wooa_author_city',
+                'placeholder' => 'Example : Los Angeles',
+                'value' => $values['wooa_author_city'][0] != '' ? $values['wooa_author_city'][0] : ''
+            )
+        );
+
+
+        $this->wooa_admin_inputs->render_admin_input(
+            array(
                 'type'=>'textbox',
                 'name'=>'wooa_author_email_address',
                 'class' => '',
@@ -248,6 +274,8 @@ class wooa_meta_boxes
             'wooa_author_username',
             'wooa_author_name',
             'wooa_author_profession',
+            'wooa_author_country',
+            'wooa_author_city',
             'wooa_author_email_address',
             'wooa_author_instagram_username',
             'wooa_author_dribble_username',

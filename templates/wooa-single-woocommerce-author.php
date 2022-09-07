@@ -1,1 +1,5 @@
-asdasdsadsadsadsadasadasdsad
+<?php
+
+global $post;
+
+

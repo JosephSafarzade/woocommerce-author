@@ -40,6 +40,12 @@ class wooa_hooks
 
         add_filter('wp_title', array($this,'modify_woocommerce_author_detail_title') , 999999 , 3 );
 
+        add_filter('wooa_return_author_country_name' , array($this->wooa_core , 'return_author_country_name') );
+
+        add_filter('wooa_return_author_city_name' , array($this->wooa_core , 'return_author_city_name') );
+
+        add_filter('wooa_show_author_country_flag' , array($this->wooa_core , 'show_author_country_flag') );
+
     }
 
 
@@ -69,6 +75,8 @@ class wooa_hooks
     function return_author_profession_by_id($author_id){
 
         global $post;
+
+
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
