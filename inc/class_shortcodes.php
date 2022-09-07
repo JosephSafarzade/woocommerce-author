@@ -31,6 +31,8 @@ class wooa_shortcodes
 
         add_shortcode ( 'wooa_show_author_country_flag' , array($this,'wooa_show_author_country_flag_render') );
 
+        add_shortcode ( 'wooa_return_author_social_url' , array($this,'wooa_return_author_social_url_render') );
+
     }
 
 
@@ -141,6 +143,19 @@ class wooa_shortcodes
         ), $atts, 'wooa_show_author_country_flag' );
 
         echo apply_filters('wooa_show_author_country_flag' , $atts['author_id'] );
+
+    }
+
+
+
+    function wooa_return_author_social_url_render($atts){
+
+        $atts = shortcode_atts( array(
+            'author_id' => '0',
+            'social_name' => 'instagram'
+        ), $atts, 'wooa_return_author_social_url' );
+
+        echo apply_filters('wooa_return_author_social_url' , $atts['author_id'] , $atts['social_name'] );
 
     }
 

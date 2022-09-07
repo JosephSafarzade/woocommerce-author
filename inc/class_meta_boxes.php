@@ -148,12 +148,12 @@ class wooa_meta_boxes
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'textbox',
-                'name'=>'wooa_author_instagram_username',
+                'name'=>'wooa_author_instagram_url',
                 'class' => '',
-                'label'=>'Author Instagram Username',
-                'id' => 'wooa_author_instagram_username',
+                'label'=>'Author Instagram URL',
+                'id' => 'wooa_author_instagram_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_instagram_username'][0] != '' ? $values['wooa_author_instagram_username'][0] : ''
+                'value' => $values['wooa_author_instagram_url'][0] != '' ? $values['wooa_author_instagram_url'][0] : ''
             )
         );
 
@@ -161,12 +161,12 @@ class wooa_meta_boxes
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'textbox',
-                'name'=>'wooa_author_dribble_username',
+                'name'=>'wooa_author_dribble_url',
                 'class' => '',
-                'label'=>'Author Dribble Username',
-                'id' => 'wooa_author_dribble_username',
+                'label'=>'Author Dribble URL',
+                'id' => 'wooa_author_dribble_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_dribble_username'][0] != '' ? $values['wooa_author_dribble_username'][0] : ''
+                'value' => $values['wooa_author_dribble_url'][0] != '' ? $values['wooa_author_dribble_url'][0] : ''
             )
         );
 
@@ -174,26 +174,12 @@ class wooa_meta_boxes
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'textbox',
-                'name'=>'wooa_author_behance_username',
+                'name'=>'wooa_author_behance_url',
                 'class' => '',
-                'label'=>'Author Behance Username',
-                'id' => 'wooa_author_behance_username',
+                'label'=>'Author Behance URL',
+                'id' => 'wooa_author_behance_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_behance_username'][0] != '' ? $values['wooa_author_behance_username'][0] : ''
-            )
-        );
-
-
-
-        $this->wooa_admin_inputs->render_admin_input(
-            array(
-                'type'=>'textbox',
-                'name'=>'wooa_author_twitter_username',
-                'class' => '',
-                'label'=>'Author Twitter Username',
-                'id' => 'wooa_author_twitter_username',
-                'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_twitter_username'][0] != '' ? $values['wooa_author_twitter_username'][0] : ''
+                'value' => $values['wooa_author_behance_url'][0] != '' ? $values['wooa_author_behance_url'][0] : ''
             )
         );
 
@@ -202,12 +188,26 @@ class wooa_meta_boxes
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'textbox',
-                'name'=>'wooa_author_linkedin_username',
+                'name'=>'wooa_author_twitter_url',
                 'class' => '',
-                'label'=>'Author Linkedin Username',
-                'id' => 'wooa_author_linkedin_username',
+                'label'=>'Author Twitter URL',
+                'id' => 'wooa_author_twitter_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_linkedin_username'][0] != '' ? $values['wooa_author_linkedin_username'][0] : ''
+                'value' => $values['wooa_author_twitter_url'][0] != '' ? $values['wooa_author_twitter_url'][0] : ''
+            )
+        );
+
+
+
+        $this->wooa_admin_inputs->render_admin_input(
+            array(
+                'type'=>'textbox',
+                'name'=>'wooa_author_linkedin_url',
+                'class' => '',
+                'label'=>'Author Linkedin URL',
+                'id' => 'wooa_author_linkedin_url',
+                'placeholder' => 'JohnDoe',
+                'value' => $values['wooa_author_linkedin_url'][0] != '' ? $values['wooa_author_linkedin_url'][0] : ''
             )
         );
 
@@ -277,11 +277,11 @@ class wooa_meta_boxes
             'wooa_author_country',
             'wooa_author_city',
             'wooa_author_email_address',
-            'wooa_author_instagram_username',
-            'wooa_author_dribble_username',
-            'wooa_author_behance_username',
-            'wooa_author_twitter_username',
-            'wooa_author_linkedin_username',
+            'wooa_author_instagram_url',
+            'wooa_author_dribble_url',
+            'wooa_author_behance_url',
+            'wooa_author_twitter_url',
+            'wooa_author_linkedin_url',
             'wooa_author_description'
         );
 

@@ -46,6 +46,8 @@ class wooa_hooks
 
         add_filter('wooa_show_author_country_flag' , array($this->wooa_core , 'show_author_country_flag') );
 
+        add_filter('wooa_return_author_social_url' , array($this->wooa_core , 'return_author_social_url') , 10, 2 );
+
     }
 
 

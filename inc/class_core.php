@@ -713,6 +713,27 @@ class wooa_core
     }
 
 
+
+
+    function return_author_social_url($author_id,$social_name){
+
+        global $post;
+
+        if ($post->post_type == 'woocommerce-author'){
+
+            $author_id = $post->ID;
+
+        } else {
+
+            $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+        }
+
+        echo get_post_meta($author_id , 'wooa_author_'.$social_name."_url" , true);
+
+    }
+
+
 }
 
 
