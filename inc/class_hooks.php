@@ -57,6 +57,7 @@ class wooa_hooks
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
+
         return get_post_meta($author_id , 'wooa_author_name' , true );
 
     }
@@ -107,13 +108,14 @@ class wooa_hooks
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        echo get_post_meta($author_id , 'wooa_author_email_address' , true );
+        return get_post_meta($author_id , 'wooa_author_email_address' , true );
 
     }
 
 
 
     function return_author_products_id( $author_id ){
+
 
         global $post;
 

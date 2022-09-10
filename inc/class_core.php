@@ -717,6 +717,7 @@ class wooa_core
 
     function return_author_social_url($author_id,$social_name){
 
+
         global $post;
 
         if ($post->post_type == 'woocommerce-author'){
@@ -729,7 +730,8 @@ class wooa_core
 
         }
 
-        echo get_post_meta($author_id , 'wooa_author_'.$social_name."_url" , true);
+
+        return get_post_meta($author_id , 'wooa_author_'.$social_name."_url" , true);
 
     }
 

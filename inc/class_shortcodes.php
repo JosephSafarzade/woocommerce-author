@@ -42,6 +42,9 @@ class wooa_shortcodes
             'author_id' => '0',
         ), $atts, 'wooa_show_author_name' );
 
+
+
+
         echo apply_filters('wooa_show_author_name' , $atts['author_id'] );
 
     }
@@ -106,7 +109,8 @@ class wooa_shortcodes
 
         $wooa_author_products_ids = apply_filters('wooa_return_author_products_id' , $atts['author_id'] );
 
-        do_action( 'wooa_show_author_products_container');
+
+        do_action( 'wooa_show_author_products');
 
     }
 
