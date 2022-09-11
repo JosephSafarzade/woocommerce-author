@@ -133,6 +133,20 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
+                'type'=>'media',
+                'name'=>'wooa_author_poster',
+                'class' => '',
+                'label'=>'Author Detail Poster',
+                'id' => 'wooa_author_poster',
+                'placeholder' => '',
+                'value' => $values['wooa_author_poster'][0] != '' ? $values['wooa_author_poster'][0] : '',
+                'value-url' => '',
+            )
+        );
+
+
+        $this->wooa_admin_inputs->render_admin_input(
+            array(
                 'type'=>'textbox',
                 'name'=>'wooa_author_email_address',
                 'class' => '',
@@ -282,7 +296,8 @@ class wooa_meta_boxes
             'wooa_author_behance_url',
             'wooa_author_twitter_url',
             'wooa_author_linkedin_url',
-            'wooa_author_description'
+            'wooa_author_description',
+            'wooa_author_poster',
         );
 
 

@@ -32,6 +32,22 @@
       margin-bottom: 30px;
     }
 
+
+    &.wooa-input-type-button {
+      border: none;
+      padding: 5px 10px;
+      min-height: 33px;
+      cursor: pointer;
+      background: #2185d0;
+      color: #ffffff;
+      font-weight: 500;
+      border-radius: 7px;
+      display: block;
+      margin-top: 15px;
+      min-width: 125px;
+      margin-right: 17px;
+    }
+
   }
 
 
@@ -45,6 +61,11 @@
 
   .select2-container--default .select2-selection--single .select2-selection__arrow{
     height: 40px;
+  }
+
+  .wooa-input-type-button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
 

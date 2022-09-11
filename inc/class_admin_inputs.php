@@ -25,6 +25,9 @@ class wooa_admin_inputs
             case 'select' :
                 $this->render_select_input($input_config);
             break;
+            case 'media' :
+                $this->render_media_upload_input($input_config);
+            break;
 
 
         }
@@ -36,6 +39,9 @@ class wooa_admin_inputs
 
 
     function render_textbox_input(array $input_config){
+
+
+
 
         printf(
             "<div class='wooa-admin-input-container'>
@@ -54,6 +60,37 @@ class wooa_admin_inputs
 
 
     }
+
+
+
+
+    function render_media_upload_input(array $input_config){
+
+        $input_config['value-url'] = $input_config['value'] != '' ? wp_get_attachment_url($input_config['value']) : '' ;
+
+        printf("<div class='wooa-admin-input-container'>
+                            <label class='wooa-admin-input-label' for='%s' >%s :</label>
+                            <input class='wooa-admin-input wooa-admin-input-text wooa-admin-input-url-value' type='text' name='%s' id='%s' value='%s'>
+                            <input class='wooa-admin-input-id-value' type='hidden' name='%s' id='%s' value='%s'>
+                            <div class='wooa-input-type-button-container'>
+                                <input class='wooa-admin-input wooa-input-type-button wooa-media-upload-button' type='button' value='Choose an Image'>
+                                <input class='wooa-admin-input wooa-input-type-button wooa-media-reset-button' type='button' value='Remove'>
+                            </div>                          
+                       </div>"
+        ,
+            $input_config['id'].'-url',
+            $input_config['label'],
+            $input_config['name']."-url",
+            $input_config['id'].'-url',
+            $input_config['value-url'],
+            $input_config['name'],
+            $input_config['id'],
+            $input_config['value'],
+        );
+
+    }
+
+
 
 
     function render_select_input(array $input_config){

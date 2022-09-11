@@ -48,6 +48,8 @@ class wooa_hooks
 
         add_filter('wooa_return_author_social_url' , array($this->wooa_core , 'return_author_social_url') , 10, 2 );
 
+        add_filter('wooa_return_author_poster_url' , array($this->wooa_core , 'return_author_poster_url') , 10, 1 );
+
     }
 
 

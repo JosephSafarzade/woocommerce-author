@@ -736,6 +736,28 @@ class wooa_core
     }
 
 
+
+    function return_author_poster_url($author_id){
+
+        global $post;
+
+        if ($post->post_type == 'woocommerce-author'){
+
+            $author_id = $post->ID;
+
+        } else {
+
+            $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+        }
+
+        $poster_id = get_post_meta($author_id , 'wooa_author_poster' , true );
+
+        return $poster_id != '' ? wp_get_attachment_url($poster_id) : '';
+
+    }
+
+
 }
 
 

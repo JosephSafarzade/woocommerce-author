@@ -33,6 +33,8 @@ class wooa_shortcodes
 
         add_shortcode ( 'wooa_return_author_social_url' , array($this,'wooa_return_author_social_url_render') );
 
+        add_shortcode ( 'wooa_return_author_poster_url' , array($this,'wooa_return_author_poster_url_render') );
+
     }
 
 
@@ -160,6 +162,18 @@ class wooa_shortcodes
         ), $atts, 'wooa_return_author_social_url' );
 
         echo apply_filters('wooa_return_author_social_url' , $atts['author_id'] , $atts['social_name'] );
+
+    }
+
+
+
+    function wooa_return_author_poster_url_render($atts){
+
+        $atts = shortcode_atts( array(
+            'author_id' => '0',
+        ), $atts, 'wooa_return_author_poster_url' );
+
+        echo apply_filters('wooa_return_author_poster_url' , $atts['author_id']);
 
     }
 
