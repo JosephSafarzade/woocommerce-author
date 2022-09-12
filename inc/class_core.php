@@ -182,7 +182,7 @@ class wooa_core
 
         $country_code =  get_post_meta($author_id , 'wooa_author_country' , true );
 
-        $country_flag = file_get_contents('https://countryflagsapi.com/svg/' . $country_code );
+        $country_flag = file_get_contents('https://countryflagsapi.com/png/' . $country_code );
 
         return sprintf ("<div class='woo-author-flag-container'>%s</div>" , $country_flag );
 
