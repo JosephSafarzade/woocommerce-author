@@ -20,7 +20,7 @@ class wooa_core
 
     function load_author_template_file() : void {
 
-        $template_path = locate_template('wooa-single-woocommerce-author.php') != '' ? locate_template('wooa-single-woocommerce-author.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-single-woocommerce-author.php' ;
+        $template_path = locate_template('woocommerce-author/wooa-single-woocommerce-author.php') != '' ? locate_template('woocommerce-author/wooa-single-woocommerce-author.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-single-woocommerce-author.php' ;
 
         require_once ( $template_path );
 
@@ -112,7 +112,7 @@ class wooa_core
 
     public function show_author_products_container(){
 
-        $template_path = locate_template('wooa-author-products-container.php') != '' ? locate_template('wooa-author-products-container.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-author-products-container.php' ;
+        $template_path = locate_template('woocommerce-author/wooa-author-products-container.php') != '' ? locate_template('woocommerce-author/wooa-author-products-container.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-author-products-container.php' ;
 
 
         require_once ( $template_path );
@@ -127,7 +127,7 @@ class wooa_core
 
         global $wooa_author_products_ids;
 
-        $template_path = locate_template('wooa-author-product-box.php') != '' ? locate_template('wooa-author-product-box.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-author-product-box.php' ;
+        $template_path = locate_template('woocommerce-author/wooa-author-product-box.php') != '' ? locate_template('woocommerce-author/wooa-author-product-box.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-author-product-box.php' ;
 
         foreach ($wooa_author_products_ids as $product_id){
 
@@ -172,6 +172,8 @@ class wooa_core
         return get_post_meta($author_id , 'wooa_author_city' , true );
 
     }
+
+
 
 
     function show_author_country_flag($author_id){
