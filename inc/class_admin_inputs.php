@@ -25,8 +25,17 @@ class wooa_admin_inputs
             case 'select' :
                 $this->render_select_input($input_config);
             break;
+
             case 'media' :
                 $this->render_media_upload_input($input_config);
+            break;
+
+            case 'url' :
+                $this->render_url_input($input_config);
+            break;
+
+            case 'email' :
+                $this->render_email_input($input_config);
             break;
 
 
@@ -40,13 +49,55 @@ class wooa_admin_inputs
 
     function render_textbox_input(array $input_config){
 
+        printf(
+            "<div class='wooa-admin-input-container'>
+                        <label class='wooa-admin-input-label' for='%s' >%s :</label>
+                        <input  class='wooa-admin-input wooa-admin-input-text %s' type='text' name='%s' id='%s' value='%s' placeholder='%s'>
+                   </div>"
+            ,
+            $input_config['id'],
+            $input_config['label'],
+            $input_config['class'],
+            $input_config['name'],
+            $input_config['id'],
+            $input_config['value'],
+            $input_config['placeholder']
+        );
+
+    }
+
+
+
+    function render_email_input(array $input_config){
+
+        printf(
+            "<div class='wooa-admin-input-container'>
+                        <label class='wooa-admin-input-label' for='%s' >%s :</label>
+                        <input  class='wooa-admin-input wooa-admin-input-email %s' type='email' name='%s' id='%s' value='%s' placeholder='%s'>
+                   </div>"
+            ,
+            $input_config['id'],
+            $input_config['label'],
+            $input_config['class'],
+            $input_config['name'],
+            $input_config['id'],
+            $input_config['value'],
+            $input_config['placeholder']
+        );
+
+    }
+
+
+
+    function render_url_input(array $input_config){
+
 
 
 
         printf(
             "<div class='wooa-admin-input-container'>
                         <label class='wooa-admin-input-label' for='%s' >%s :</label>
-                        <input  class='wooa-admin-input wooa-admin-input-text %s' type='text' name='%s' id='%s' value='%s' placeholder='%s'>
+                        <input  class='wooa-admin-input wooa-admin-input-url %s' type='url' name='%s' id='%s' value='%s' placeholder='%s'>
                    </div>"
             ,
             $input_config['id'],

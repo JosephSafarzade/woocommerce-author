@@ -1,3 +1,5 @@
+$border-radius : 5px;
+
 .wooa-admin-input-container{
 
   margin-top: 30px;
@@ -15,13 +17,13 @@
   .wooa-admin-input{
 
     &.wooa-admin-input-text {
-      border-radius: 20 !important;
+      border-radius: $border-radius !important;
       min-width: 325px;
       height: 39px;
     }
 
     &.wooa-admin-input-textarea {
-      border-radius: 10px !important;
+      border-radius: $border-radius !important;
       min-width: 325px;
       height: 200px;
     }
@@ -41,11 +43,24 @@
       background: #2185d0;
       color: #ffffff;
       font-weight: 500;
-      border-radius: 7px;
+      border-radius: $border-radius;
       display: block;
       margin-top: 15px;
       min-width: 125px;
       margin-right: 17px;
+    }
+
+    &.wooa-admin-input-url {
+      border-radius: $border-radius !important;
+      min-width: 325px;
+      height: 39px;
+    }
+
+
+    &.wooa-admin-input-email {
+      border-radius: $border-radius !important;
+      min-width: 325px;
+      height: 39px;
     }
 
   }

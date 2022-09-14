@@ -147,7 +147,7 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
-                'type'=>'textbox',
+                'type'=>'email',
                 'name'=>'wooa_author_email_address',
                 'class' => '',
                 'label'=>'Author Email Address',
@@ -161,7 +161,7 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
-                'type'=>'textbox',
+                'type'=>'url',
                 'name'=>'wooa_author_instagram_url',
                 'class' => '',
                 'label'=>'Author Instagram URL',
@@ -174,7 +174,7 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
-                'type'=>'textbox',
+                'type'=>'url',
                 'name'=>'wooa_author_dribble_url',
                 'class' => '',
                 'label'=>'Author Dribble URL',
@@ -187,7 +187,7 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
-                'type'=>'textbox',
+                'type'=>'url',
                 'name'=>'wooa_author_behance_url',
                 'class' => '',
                 'label'=>'Author Behance URL',
@@ -201,7 +201,7 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
-                'type'=>'textbox',
+                'type'=>'url',
                 'name'=>'wooa_author_twitter_url',
                 'class' => '',
                 'label'=>'Author Twitter URL',
@@ -215,7 +215,7 @@ class wooa_meta_boxes
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
-                'type'=>'textbox',
+                'type'=>'url',
                 'name'=>'wooa_author_linkedin_url',
                 'class' => '',
                 'label'=>'Author Linkedin URL',

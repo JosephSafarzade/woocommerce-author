@@ -98,7 +98,6 @@ class wooa_core
 
         $authors_list = get_posts($args);
 
-
         foreach ($authors_list as $author){
 
             $authors[$author->ID] = $author->post_title;
@@ -113,7 +112,6 @@ class wooa_core
     public function show_author_products_container(){
 
         $template_path = locate_template('woocommerce-author/wooa-author-products-container.php') != '' ? locate_template('woocommerce-author/wooa-author-products-container.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-author-products-container.php' ;
-
 
         require_once ( $template_path );
 
@@ -157,7 +155,11 @@ class wooa_core
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        return get_post_meta($author_id , 'wooa_author_country' , true );
+        $country_shortname = get_post_meta($author_id , 'wooa_author_country' , true );
+
+        $country_fullname = apply_filters('wooa_return_country_full_name',$country_shortname);
+
+        return esc_attr( $country_fullname );
 
     }
 
@@ -169,7 +171,7 @@ class wooa_core
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        return get_post_meta($author_id , 'wooa_author_city' , true );
+        return esc_attr( get_post_meta($author_id , 'wooa_author_city' , true ) );
 
     }
 
@@ -735,7 +737,7 @@ class wooa_core
         }
 
 
-        return get_post_meta($author_id , 'wooa_author_'.$social_name."_url" , true);
+        return esc_url( get_post_meta($author_id , 'wooa_author_'.$social_name."_url" , true) );
 
     }
 
@@ -757,9 +759,181 @@ class wooa_core
 
         $poster_id = get_post_meta($author_id , 'wooa_author_poster' , true );
 
-        return $poster_id != '' ? wp_get_attachment_url($poster_id) : '';
+        return esc_url( $poster_id != '' ? wp_get_attachment_url($poster_id) : '' );
 
     }
+
+
+
+
+
+    function return_author_name_by_id($author_id)  {
+
+        global $post;
+
+        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+
+        return get_post_meta($author_id , 'wooa_author_name' , true );
+
+    }
+
+
+    function return_author_username_by_id($author_id){
+
+        global $post;
+
+        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+        return get_post_meta($author_id , 'wooa_author_username' , true );
+
+    }
+
+
+
+    function return_author_profession_by_id($author_id){
+
+        global $post;
+
+
+
+        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+        echo get_post_meta($author_id , 'wooa_author_profession' , true );
+
+    }
+
+
+
+
+    function return_author_description_by_id($author_id){
+
+        global $post;
+
+        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+        echo get_post_meta($author_id , 'wooa_author_description' , true );
+
+    }
+
+
+
+    function return_author_email_by_id($author_id){
+
+        global $post;
+
+        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+        return get_post_meta($author_id , 'wooa_author_email_address' , true );
+
+    }
+
+
+
+    function return_author_products_id( $author_id ){
+
+
+        global $post;
+
+        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
+
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => -1,
+            'fields'  => 'ids',
+            'meta_query' => array(
+                array(
+                    'key'     => 'wooa_product_author_id',
+                    'value'   => array( $author_id ),
+                    'compare' => 'IN',
+                ),
+            ),
+        );
+
+        $products = get_posts($args);
+
+        return !empty($products) ? $products : false ;
+
+    }
+
+
+
+
+    function handle_template_redirect_hook() : void {
+
+
+        if ( is_404() ){
+
+            $current_url = $this->get_full_url();
+
+            $is_correct_url_structure_loaded = $this->check_for_right_url_structure( $current_url );
+
+
+            if ( $is_correct_url_structure_loaded ) {
+
+                $author_name = basename($current_url);
+
+                $author_id = $this->check_if_author_exist ( $author_name );
+
+                if( $author_id != 0 ){
+
+                    $this->setup_initial_post_data($author_id);
+
+                    $this->load_author_template_file();
+
+                }
+
+
+            }
+
+
+        }
+
+    }
+
+
+
+
+
+    function modify_woocommerce_author_detail_title($title, $sep, $seplocation){
+
+        global $post;
+
+        if ( $post->post_type == 'woocommerce-author' ) {
+
+            $author_name = get_post_meta( $post->ID , 'wooa_author_name' , 'true' );
+
+            if( $author_name != '' ){
+
+                $new_title = $author_name . " Profile";
+
+
+            } else {
+
+                $author_username = get_post_meta( $post->ID , 'wooa_author_username' , 'true' );
+
+                $new_title = $author_username != '' ? $author_username . " Profile" : $post->title . " Profile";
+
+            }
+
+            return apply_filters ('wooa_single_author_detail_title' , $new_title , $sep , $seplocation );
+
+        } else {
+
+            return $title;
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
 
 
 }
