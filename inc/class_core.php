@@ -157,7 +157,7 @@ class wooa_core
 
         $country_shortname = get_post_meta($author_id , 'wooa_author_country' , true );
 
-        $country_fullname = apply_filters('wooa_return_country_full_name',$country_shortname);
+        $country_fullname = ucfirst( strtolower ( apply_filters('wooa_return_country_full_name',$country_shortname) ) );
 
         return esc_attr( $country_fullname );
 
