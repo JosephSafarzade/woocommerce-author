@@ -773,8 +773,9 @@ class wooa_core
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
+        $author_name = get_post_meta($author_id , 'wooa_author_name' , true );
 
-        return get_post_meta($author_id , 'wooa_author_name' , true );
+        return  $author_name != '' && $author_name != false ?  esc_attr( $author_name ) : false ;
 
     }
 
@@ -785,7 +786,10 @@ class wooa_core
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        return get_post_meta($author_id , 'wooa_author_username' , true );
+        $author_username = get_post_meta($author_id , 'wooa_author_username' , true );
+
+        return  $author_username != '' && $author_username != false ?  esc_attr( $author_username ) : false ;
+
 
     }
 
@@ -795,11 +799,11 @@ class wooa_core
 
         global $post;
 
-
-
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        echo get_post_meta($author_id , 'wooa_author_profession' , true );
+        $author_profession = get_post_meta($author_id , 'wooa_author_profession' , true );
+
+        return  $author_profession != '' && $author_profession != false ?  esc_attr( $author_profession ) : false ;
 
     }
 
@@ -812,7 +816,9 @@ class wooa_core
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        echo get_post_meta($author_id , 'wooa_author_description' , true );
+        $autho_description = get_post_meta($author_id , 'wooa_author_description' , true );
+
+        return  $autho_description != '' && $autho_description != false ?  esc_attr( $autho_description ) : false ;
 
     }
 
@@ -824,7 +830,9 @@ class wooa_core
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        return get_post_meta($author_id , 'wooa_author_email_address' , true );
+        $author_email_address = get_post_meta($author_id , 'wooa_author_email_address' , true );
+
+        return  $author_email_address != '' && $author_email_address != false ?  esc_attr( $author_email_address ) : false ;
 
     }
 
@@ -922,7 +930,6 @@ class wooa_core
 
             return $title;
 
-
         }
 
 
@@ -931,6 +938,50 @@ class wooa_core
 
 
 
+    function return_author_detail_url($author_id){
+
+        $author_username = strtolower ( apply_filters('wooa_show_author_username' , $author_id ) );
+
+        if( $author_username && $author_username != '' ){
+
+            $site_url = get_site_url();
+
+            return esc_url($site_url . "/" . $author_username );
+
+        } else{
+
+            return false;
+
+        }
+
+    }
+
+
+    function return_product_author_id($product_id){
+
+        $author_id = get_post_meta($product_id , 'wooa_product_author_id' , true );
+
+        return $author_id != '' ? esc_attr($author_id) : false;
+
+
+    }
+
+
+    function return_product_author_name($product_id){
+
+        $author_id = apply_filters('wooa_return_product_author_id' , $product_id );
+
+        if ( !$author_id ){
+
+            return false;
+
+        } else {
+
+            return apply_filters('wooa_show_author_name' , $author_id );
+
+        }
+
+    }
 
 
 
