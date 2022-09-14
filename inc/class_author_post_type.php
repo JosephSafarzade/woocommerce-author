@@ -46,11 +46,12 @@ class wooa_author_post_type
             'show_ui'            => true,
             'show_in_menu'       => true,
             'query_var'          => true,
+            'menu_icon'         =>  'dashicons-universal-access',
             'rewrite'            => array( 'slug' => 'woocommerce-author' ),
             'capability_type'    => 'post',
             'has_archive'        => true,
             'hierarchical'      => false,
-            'menu_position'      => 20,
+            'menu_position'      => 90,
             'supports'           => array( 'title','thumbnail' ),
             'show_in_rest'       => true
         );

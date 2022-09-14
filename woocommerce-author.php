@@ -29,5 +29,8 @@ define('WOOA_ASSETS_CSS_FOLDER_URL' , WOOA_ASSETS_FOLDER_URL . "/css" );
 
 define('WOOA_ASSETS_JS_FOLDER_URL' , WOOA_ASSETS_FOLDER_URL . "/js" );
 
+define('WOOA_ASSETS_MEDIA_FOLDER_URL' , WOOA_ASSETS_FOLDER_URL . "/media" );
+
+
 
 require_once (WOOA_PLUGIN_INC_DIR . "/framework.php");

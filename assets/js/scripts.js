@@ -1,11 +1,7 @@
 jQuery(document).ready(function(){
-
-
     wooa_init_select2_inputs();
     wooa_handle_media_upload_button_click();
     wooa_handle_media_reset_button_click();
-
-
 });
 
 

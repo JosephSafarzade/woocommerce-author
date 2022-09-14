@@ -88,7 +88,7 @@ class wooa_core
     static function return_all_authors_for_admin_panel_input(){
 
         $authors = array(
-            '0' => 'No Author'
+            '0' => __('No Author',WOOA_TEXT_DOMAIN )
         );
 
         $args = array(
@@ -816,9 +816,9 @@ class wooa_core
 
         $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
-        $autho_description = get_post_meta($author_id , 'wooa_author_description' , true );
+        $author_description = get_post_meta($author_id , 'wooa_author_description' , true );
 
-        return  $autho_description != '' && $autho_description != false ?  esc_attr( $autho_description ) : false ;
+        return  $author_description != '' && $author_description != false ?  esc_attr( $author_description ) : false ;
 
     }
 
