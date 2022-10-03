@@ -30,6 +30,18 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
     }
 
 
+    public function get_style_depends() {
+
+        if( !wp_style_is( 'frontend-general', 'registered' ) ){
+
+            wp_register_style( 'frontend-general',WOOA_ASSETS_CSS_FOLDER_URL . "/frontend-general.css" , [] ,WOOA_PLUGIN_VERSION);
+
+        }
+
+        return [ 'frontend-general' ];
+    }
+
+
     protected function register_controls()
     {
 
