@@ -1,17 +1,16 @@
 <?php
 
-
 class wooa_elementor_widget_show_author_email extends \Elementor\Widget_Base
 {
 
     public function get_name()
     {
-        return 'wooa_show_author_profession';
+        return 'wooa_show_author_email';
     }
 
     public function get_title()
     {
-        return esc_html__('Show Author Profession', WOOA_TEXT_DOMAIN);
+        return esc_html__('Show Author Email', WOOA_TEXT_DOMAIN);
     }
 
     public function get_icon()
@@ -149,6 +148,4 @@ class wooa_elementor_widget_show_author_email extends \Elementor\Widget_Base
 
 }
 
-
 $widgets_manager->register(new \wooa_elementor_widget_show_author_email());
-
