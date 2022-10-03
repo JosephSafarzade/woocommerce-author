@@ -55,9 +55,12 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
             ]
         );
 
+        $repeater = new \Elementor\Repeater();
 
 
-        $this->add_control(
+
+
+        $repeater->add_control(
             'social_name',
             [
                 'label' => esc_html__('Select Social Media', WOOA_TEXT_DOMAIN),
@@ -70,7 +73,7 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
         );
 
 
-        $this->add_control(
+        $repeater->add_control(
             'social_icon',
             [
                 'label' => esc_html__( 'Social Icon', WOOA_TEXT_DOMAIN ),
@@ -82,6 +85,18 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
                 'recommended' => [],
             ]
         );
+
+
+
+        $this->add_control(
+            'social_list',
+            [
+                'label' => esc_html__( 'Social Icons', WOOA_TEXT_DOMAIN ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+            ]
+        );
+
 
 
 
@@ -100,34 +115,44 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
 
         $author_id = apply_filters('wooa_return_author_id', $settings['author_id']);
 
-        $social_name = $settings['social_name'];
 
-        if($social_name == '0' || $social_name == '') {
+        if($settings['social_list']){
 
-            printf("<p>No Social Name Has Been Selected !</p>");
+            foreach ($settings['social_list'] as $item){
 
-            return false;
+                $social_name = $item['social_name'];
+
+
+                if($social_name[0] == '0' || $social_name == '0' || $social_name == '') {
+
+                    printf("<p>No Social Name Has Been Selected !</p>");
+
+                    continue;
+
+                } else {
+
+                    $social_url = get_post_meta($author_id,"wooa_author_{$social_name}_url",true);
+
+                    ?>
+
+                        <a href="<?php echo esc_url($social_url) ?>" target="_blank" rel="nofollow">
+
+                            <span class="wooa-social-icon-container">
+
+                                <?php \Elementor\Icons_Manager::render_icon( $item['social_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+
+                            </span>
+
+                        </a>
+
+                    <?php
+
+                }
+
+
+            }
 
         }
-
-        $social_url = get_post_meta($author_id,"wooa_author_{$social_name}_url",true);
-
-
-        ?>
-
-        <a href="<?php echo esc_url($social_url) ?>" target="_blank" rel="nofollow">
-
-            <span class="wooa-social-icon-container">
-
-                <?php \Elementor\Icons_Manager::render_icon( $settings['social_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-
-            </span>
-
-        </a>
-
-
-        <?php
-
 
     }
 
