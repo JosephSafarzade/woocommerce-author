@@ -769,10 +769,6 @@ class wooa_core
 
     function return_author_name_by_id($author_id)  {
 
-        global $post;
-
-        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
-
         $author_name = get_post_meta($author_id , 'wooa_author_name' , true );
 
         return  $author_name != '' && $author_name != false ?  esc_attr( $author_name ) : false ;
@@ -980,6 +976,114 @@ class wooa_core
             return apply_filters('wooa_show_author_name' , $author_id );
 
         }
+
+    }
+
+
+
+    static function return_author_list_for_elementor_widget_setting(){
+
+        $authors = array(
+            '0' => __('Default',WOOA_TEXT_DOMAIN )
+        );
+
+        $args = array(
+            'post_type' => 'woocommerce-author',
+            'posts_per_page' => -1
+        );
+
+        $authors_list = get_posts($args);
+
+        foreach ($authors_list as $author){
+
+            $authors[$author->ID] = $author->post_title;
+
+        }
+
+        return $authors;
+
+
+    }
+
+
+
+
+    static function return_social_list_for_elementor_widget_setting(){
+
+        return array(
+            'instagram'     => 'Instagram',
+            'dribble'       => 'Dribble',
+            'behance'       => 'Behance',
+            'twitter'       => 'Twitter',
+            'linkedin'      => 'Linkedin',
+        );
+
+    }
+
+
+
+    static function return_container_tag_list_for_elementor_widget_setting(){
+
+
+        return array(
+            'p' => __('Paragraph',WOOA_TEXT_DOMAIN ),
+            'h1' => __('Heading 1 ( H1 )',WOOA_TEXT_DOMAIN ),
+            'h2' => __('Heading 2 ( H2 )',WOOA_TEXT_DOMAIN ),
+            'h3' => __('Heading 3 ( H3 )',WOOA_TEXT_DOMAIN ),
+            'h4' => __('Heading 4 ( H4 )',WOOA_TEXT_DOMAIN ),
+            'h5' => __('Heading 5 ( H5 )',WOOA_TEXT_DOMAIN ),
+            'h6' => __('Heading 6 ( H6 )',WOOA_TEXT_DOMAIN ),
+
+        );;
+
+
+    }
+
+
+
+
+    function return_author_id($author_id){
+
+        if(is_array($author_id)){
+
+            $author_id = $author_id[0];
+
+        }
+
+        if( $author_id != '0' ){
+
+            return $author_id;
+
+        }
+
+
+
+        if(is_page()){
+
+            return $author_id;
+
+        }
+
+
+        if(is_single() && get_post_type() == 'product'){
+
+            global $post;
+
+            return get_post_meta ( $post->ID , 'wooa_product_author_id' , true );
+
+        }
+
+
+
+        if(is_single() && get_post_type() == 'woocommerce-author'){
+
+            return get_the_ID();
+
+        }
+
+
+        return $author_id;
+
 
     }
 

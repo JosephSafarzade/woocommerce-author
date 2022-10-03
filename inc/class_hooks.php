@@ -56,6 +56,7 @@ class wooa_hooks
 
         add_filter('wooa_return_product_author_name' , array($this->wooa_core , 'return_product_author_name') , 10 , 1 );
 
+        add_filter('wooa_return_author_id' , array($this->wooa_core , 'return_author_id') , 10 , 1 );
 
     }
 

@@ -59,11 +59,22 @@ class wooa_meta_boxes
 
     function render_woocommerce_author_info_metabox(){
 
-        $values = $_GET['post'] != ''  ? get_post_meta( $_GET['post']  ) : [];
+
+
+        $values = isset($_GET['post']) && $_GET['post'] != ''  ? get_post_meta( $_GET['post']  ) : [];
+
+
+
 
 
         wp_nonce_field( 'wooa_author_info_metabox', 'wooa_author_info_metabox' );
 
+
+        $this->wooa_admin_inputs->render_admin_input(
+            array(
+                'type'=>'check_elementor',
+            )
+        );
 
 
         $this->wooa_admin_inputs->render_admin_input(
@@ -74,7 +85,7 @@ class wooa_meta_boxes
                 'label'=>'Author Username',
                 'id' => 'wooa_author_username',
                 'placeholder' => 'Author Username',
-                'value' => $values['wooa_author_username'][0] != '' ? $values['wooa_author_username'][0] : ''
+                'value' => isset($values['wooa_author_username']) && $values['wooa_author_username'][0] != '' ? $values['wooa_author_username'][0] : ''
             )
         );
 
@@ -87,7 +98,7 @@ class wooa_meta_boxes
                 'label'=>'Author Name',
                 'id' => 'wooa_author_name',
                 'placeholder' => 'Author Full Name',
-                'value' => $values['wooa_author_name'][0] != '' ? $values['wooa_author_name'][0] : ''
+                'value' => isset($values['wooa_author_name']) && $values['wooa_author_name'][0] != '' ? $values['wooa_author_name'][0] : ''
             )
         );
 
@@ -100,7 +111,7 @@ class wooa_meta_boxes
                 'label'=>'Author Profession',
                 'id' => 'wooa_author_profession',
                 'placeholder' => 'Example : Art Director',
-                'value' => $values['wooa_author_profession'][0] != '' ? $values['wooa_author_profession'][0] : ''
+                'value' => isset($values['wooa_author_profession']) && $values['wooa_author_profession'][0] != '' ? $values['wooa_author_profession'][0] : ''
             )
         );
 
@@ -112,7 +123,7 @@ class wooa_meta_boxes
                 'class' => '',
                 'label'=>'Author Country',
                 'id' => 'wooa_author_country',
-                'value' => $values['wooa_author_country'][0] != '' ? $values['wooa_author_country'][0] : '',
+                'value' => isset($values['wooa_author_country']) && $values['wooa_author_country'][0] != '' ? $values['wooa_author_country'][0] : '',
                 'options' => wooa_core::return_all_country_names_for_admin_panel_input()
             )
         );
@@ -126,7 +137,7 @@ class wooa_meta_boxes
                 'label'=>'Author City',
                 'id' => 'wooa_author_city',
                 'placeholder' => 'Example : Los Angeles',
-                'value' => $values['wooa_author_city'][0] != '' ? $values['wooa_author_city'][0] : ''
+                'value' => isset($values['wooa_author_city']) && $values['wooa_author_city'][0] != '' ? $values['wooa_author_city'][0] : ''
             )
         );
 
@@ -139,7 +150,7 @@ class wooa_meta_boxes
                 'label'=>'Author Detail Poster',
                 'id' => 'wooa_author_poster',
                 'placeholder' => '',
-                'value' => $values['wooa_author_poster'][0] != '' ? $values['wooa_author_poster'][0] : '',
+                'value' => isset($values['wooa_author_poster']) && $values['wooa_author_poster'][0] != '' ? $values['wooa_author_poster'][0] : '',
                 'value-url' => '',
             )
         );
@@ -153,7 +164,7 @@ class wooa_meta_boxes
                 'label'=>'Author Email Address',
                 'id' => 'wooa_author_email_address',
                 'placeholder' => 'Example@example.com',
-                'value' => $values['wooa_author_email_address'][0] != '' ? $values['wooa_author_email_address'][0] : ''
+                'value' => isset($values['wooa_author_email_address']) && $values['wooa_author_email_address'][0] != '' ? $values['wooa_author_email_address'][0] : ''
             )
         );
 
@@ -167,7 +178,7 @@ class wooa_meta_boxes
                 'label'=>'Author Instagram URL',
                 'id' => 'wooa_author_instagram_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_instagram_url'][0] != '' ? $values['wooa_author_instagram_url'][0] : ''
+                'value' => isset($values['wooa_author_instagram_url']) && $values['wooa_author_instagram_url'][0] != '' ? $values['wooa_author_instagram_url'][0] : ''
             )
         );
 
@@ -180,7 +191,7 @@ class wooa_meta_boxes
                 'label'=>'Author Dribble URL',
                 'id' => 'wooa_author_dribble_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_dribble_url'][0] != '' ? $values['wooa_author_dribble_url'][0] : ''
+                'value' => isset($values['wooa_author_dribble_url']) && $values['wooa_author_dribble_url'][0] != '' ? $values['wooa_author_dribble_url'][0] : ''
             )
         );
 
@@ -193,7 +204,7 @@ class wooa_meta_boxes
                 'label'=>'Author Behance URL',
                 'id' => 'wooa_author_behance_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_behance_url'][0] != '' ? $values['wooa_author_behance_url'][0] : ''
+                'value' => isset($values['wooa_author_behance_url']) && $values['wooa_author_behance_url'][0] != '' ? $values['wooa_author_behance_url'][0] : ''
             )
         );
 
@@ -207,7 +218,7 @@ class wooa_meta_boxes
                 'label'=>'Author Twitter URL',
                 'id' => 'wooa_author_twitter_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_twitter_url'][0] != '' ? $values['wooa_author_twitter_url'][0] : ''
+                'value' => isset($values['wooa_author_twitter_url']) && $values['wooa_author_twitter_url'][0] != '' ? $values['wooa_author_twitter_url'][0] : ''
             )
         );
 
@@ -221,7 +232,7 @@ class wooa_meta_boxes
                 'label'=>'Author Linkedin URL',
                 'id' => 'wooa_author_linkedin_url',
                 'placeholder' => 'JohnDoe',
-                'value' => $values['wooa_author_linkedin_url'][0] != '' ? $values['wooa_author_linkedin_url'][0] : ''
+                'value' => isset($values['wooa_author_linkedin_url']) && $values['wooa_author_linkedin_url'][0] != '' ? $values['wooa_author_linkedin_url'][0] : ''
             )
         );
 
@@ -235,7 +246,7 @@ class wooa_meta_boxes
                 'label'=>'Author Description',
                 'id' => 'wooa_author_description',
                 'placeholder' => '',
-                'value' => $values['wooa_author_description'][0] != '' ? $values['wooa_author_description'][0] : ''
+                'value' => isset($values['wooa_author_description']) && $values['wooa_author_description'][0] != '' ? $values['wooa_author_description'][0] : ''
             )
         );
 
@@ -248,7 +259,7 @@ class wooa_meta_boxes
 
     public function render_woocommerce_assign_author_metabox(){
 
-        $value = $_GET['post'] != ''  ? get_post_meta( $_GET['post'] , 'wooa_product_author_id' , true  ) : [];
+        $value = isset($_GET['post']) && $_GET['post'] != ''  ? get_post_meta( $_GET['post'] , 'wooa_product_author_id' , true  ) : '';
 
 
         wp_nonce_field( 'wooa_assign_author_metabox', 'wooa_assign_author_metabox' );

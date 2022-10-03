@@ -14,8 +14,6 @@ class wooa_scripts
 
         global $current_screen;
 
-        var_dump($current_screen->id);
-
 
         if ($current_screen->id == 'woocommerce-author' || $current_screen->id == 'product'  ){
 

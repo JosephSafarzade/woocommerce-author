@@ -52,7 +52,7 @@ class wooa_author_post_type
             'has_archive'        => true,
             'hierarchical'      => false,
             'menu_position'      => 90,
-            'supports'           => array( 'title','thumbnail' ),
+            'supports'           => array( 'title','thumbnail','editor' ),
             'show_in_rest'       => true
         );
 

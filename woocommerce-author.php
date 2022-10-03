@@ -9,9 +9,13 @@ License: GPLv2 or later
 Text Domain: woocommerce-author
 */
 
+if( !function_exists('get_plugin_data') ){
+    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+}
+
 $plugin_data = get_plugin_data( __FILE__ );
 
-define('WOOA_PLUGIN_VERSION' , $plugin_data['version']);
+define('WOOA_PLUGIN_VERSION' , $plugin_data['Version']);
 
 define('WOOA_TEXT_DOMAIN' , $plugin_data['TextDomain'] );
 

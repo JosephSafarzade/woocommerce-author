@@ -13,6 +13,9 @@ class wooa_admin_inputs
 
         switch ($input_config['type']) {
 
+            case  'check_elementor':
+                $this->render_check_elementor_input();
+            break;
 
             case 'textbox' :
                 $this->render_textbox_input($input_config);
@@ -186,6 +189,31 @@ class wooa_admin_inputs
             $input_config['id'],
             $input_config['value'],
         );
+
+
+    }
+
+
+    function render_check_elementor_input(){
+
+        $supported_post_types  = get_option('elementor_cpt_support');
+
+        $admin_url = get_admin_url( null , 'admin.php') . "?page=elementor";
+
+        if(empty($supported_post_types) || $supported_post_types == ''){
+
+            return;
+
+        }else{
+
+            if(!in_array('woocommerce-author',$supported_post_types)){
+
+                printf('<strong>Notice : Please visit <a href="%s">following page</a> to enable elementor for WooCommerce Author post type</strong>',$admin_url);
+
+            }
+
+        }
+
 
 
     }

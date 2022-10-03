@@ -13,6 +13,7 @@ if ( $woocommerce_installed ) {
         'class_meta_boxes.php',
         'class_admin_inputs.php',
         'class_shortcodes.php',
+        'elementor-widgets/class_elementor.php',
     );
 
 
