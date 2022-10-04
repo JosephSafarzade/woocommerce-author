@@ -109,7 +109,7 @@ class wooa_elementor_widget_show_author_name extends \Elementor\Widget_Base
             "<%s class='wooa-author-name-container'>%s</%s>" ,
             $container ,
             $author_name ,
-            $container
+            $container ,
         );
 
     }

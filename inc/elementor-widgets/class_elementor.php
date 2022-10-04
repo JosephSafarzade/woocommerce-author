@@ -21,7 +21,9 @@ class wooa_elementor{
             'class_elementor_widget_show_author_country.php',
             'class_elementor_widget_show_author_country_flag.php',
             'class_elementor_widget_show_author_social_icon.php',
-            'class_elementor_widget_show_author_profile_picture.php'
+            'class_elementor_widget_show_author_profile_picture.php',
+            'class_elementor_widget_show_author_products.php'
+
         );
 
         foreach ($elementor_shortcodes as $widget){

@@ -1087,6 +1087,76 @@ class wooa_core
 
     }
 
+    static function load_author_products(array $settings){
+
+        $args = array(
+
+            'post_type' => 'product',
+            'posts_per_page' => $settings['products_count'],
+            'post_status' => 'publish',
+            'fields' => 'ids',
+            'meta_query' => array(
+                array(
+                    'key'     => 'wooa_product_author_id',
+                    'value'   => $settings['author_id'],
+                    'compare' => '=',
+                ),
+            ),
+
+        );
+
+        $products = get_posts($args);
+
+        return empty($products) ? false : $products;
+
+
+    }
+
+
+    static function generate_author_products_html(array $products){
+
+
+        foreach ($products as $product_id){
+
+            try {
+
+                $product = new WC_Product($product_id);
+
+                $product_data = array(
+                    'title' => $product->get_title(),
+                    'regular_price' => $product->get_regular_price(),
+                    'sale_price' => $product->get_sale_price(),
+                    'image_id' => $product->get_image_id(),
+                    'is_sale' => $product->is_on_sale(),
+                    'image' => $product->get_image(),
+                    'description' => $product->get_description(),
+                    'short_description' => $product->get_short_description()
+                );
+
+                wooa_core::generate_single_product_box_html($product_data);
+
+
+
+            }catch(Exception $e){
+
+                _e('Invalid Product ID Has Been Provided' , WOOA_TEXT_DOMAIN);
+
+                continue;
+
+            }
+
+        }
+
+
+    }
+
+
+    static public function generate_single_product_box_html($product_data){
+
+
+
+    }
+
 
 
 
