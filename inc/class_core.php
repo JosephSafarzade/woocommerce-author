@@ -1153,10 +1153,16 @@ class wooa_core
 
     static public function generate_single_product_box_html($product_data){
 
+   ?>
+        <div>
+            <?php echo $product_data[title] ?>
+        </div>
 
 
 
 
+
+<?php
     }
 
 
