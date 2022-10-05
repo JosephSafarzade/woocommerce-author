@@ -68,6 +68,9 @@ class wooa_elementor_widget_show_author_products extends \Elementor\Widget_Base
                     '3'     => esc_html__( 'Three', WOOA_TEXT_DOMAIN ),
                     '4'     => esc_html__( 'Four', WOOA_TEXT_DOMAIN ),
                 ],
+                'selectors' => [
+                    '{{WRAPPER}} .wooa-author-products-container' => 'border-radius: {{VALUE}};',
+                ],
             ]
         );
 
@@ -114,7 +117,12 @@ class wooa_elementor_widget_show_author_products extends \Elementor\Widget_Base
 
         } else {
 
-            wooa_core::generate_author_products_html($products);
+            printf('<div clas="wooa-author-products-container">');
+
+                wooa_core::generate_author_products_html($products);
+
+            printf('</div>');
+
 
         }
 
