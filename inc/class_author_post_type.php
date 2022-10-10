@@ -11,6 +11,10 @@ class wooa_author_post_type
 
     public function register_woocommerce_author_post_type(){
 
+        $wooa_detail_slug = get_option('wooa_url_slug') ;
+
+        $wooa_detail_slug = $wooa_detail_slug && $wooa_detail_slug != '' ? $wooa_detail_slug : 'woocommerce-author';
+
         $labels = array(
             'name'                  => _x( 'WooCommerce Author', 'Post type general name', WOOA_TEXT_DOMAIN ),
             'singular_name'         => _x( 'WooCommerce Author', 'Post type singular name', WOOA_TEXT_DOMAIN ),
@@ -47,7 +51,7 @@ class wooa_author_post_type
             'show_in_menu'       => true,
             'query_var'          => true,
             'menu_icon'         =>  'dashicons-universal-access',
-            'rewrite'            => array( 'slug' => 'woocommerce-author' ),
+            'rewrite'            => array( 'slug' => $wooa_detail_slug ),
             'capability_type'    => 'post',
             'has_archive'        => true,
             'hierarchical'      => false,

@@ -14,8 +14,9 @@ class wooa_scripts
 
         global $current_screen;
 
+        $allowed_screens = array("options-permalink",'woocommerce-author',"product");
 
-        if ($current_screen->id == 'woocommerce-author' || $current_screen->id == 'product'  ){
+        if ( in_array( $current_screen->id , $allowed_screens ) ){
 
             wp_enqueue_style( 'wooa-admin-style', WOOA_ASSETS_CSS_FOLDER_URL . "/admin-style.css", [] , WOOA_PLUGIN_VERSION , 'all' );
 
