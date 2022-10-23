@@ -105,18 +105,20 @@ class wooa_elementor_widget_show_author_profession extends \Elementor\Widget_Bas
 
         $settings = $this->get_settings_for_display();
 
-        $container = $settings['container_tag'];
+        $shortcode = sprintf(
 
-        $author_id = apply_filters('wooa_return_author_id', $settings['author_id']);
+            '[wooa_show_author_profession author_id="%s" container_tag="%s"][/wooa_show_author_profession]',
 
-        $author_profession = apply_filters('wooa_show_author_profession', $author_id);
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        printf(
-            "<%s class='wooa-author-profession-container'>%s</%s>",
-            $container,
-            $author_profession,
-            $container
+            $settings['container_tag'][0] ,
+
         );
+
+        echo do_shortcode( $shortcode );
+
+
+
 
     }
 

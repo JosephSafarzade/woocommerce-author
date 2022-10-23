@@ -115,33 +115,22 @@ class wooa_elementor_widget_show_author_email extends \Elementor\Widget_Base
     protected function render()
     {
 
+
         $settings = $this->get_settings_for_display();
 
-        $container = $settings['container_tag'];
+        $shortcode = sprintf(
 
-        $author_id = apply_filters('wooa_return_author_id', $settings['author_id']);
+            '[wooa_show_author_email author_id="%s" container_tag="%s" linkable="%s"][/wooa_show_author_email]',
 
-        $author_email = apply_filters('wooa_show_author_email', $author_id);
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        if($settings['is_it_linkable'] === 'yes'){
+            $settings['container_tag'][0] ,
 
-            printf(
-                "<a class='wooa-author-email-container' href='%s'>%s</a>",
-                'mailto:' . sanitize_email($author_email),
-                sanitize_email($author_email),
-            );
+            $settings['is_it_linkable'] ,
 
+        );
 
-        }else{
-
-            printf(
-                "<%s class='wooa-author-email-container'>%s</%s>",
-                $container,
-                sanitize_email($author_email),
-                $container
-            );
-
-        }
+        echo do_shortcode( $shortcode );
 
 
     }

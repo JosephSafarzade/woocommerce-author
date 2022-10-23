@@ -109,25 +109,20 @@ class wooa_elementor_widget_show_author_profile_picture extends \Elementor\Widge
 
         $settings = $this->get_settings_for_display();
 
-        $author_id = apply_filters('wooa_return_author_id', $settings['author_id']);
+        $shortcode = sprintf(
 
-        $image_url = get_the_post_thumbnail_url($author_id,'full');
+            '[wooa_show_author_profile_picture author_id="%s" width="%s" height="%s"][/wooa_show_author_profile_picture]',
 
-        if ($image_url != false){
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-            printf(
-                '<img class="wooa-author-profile-picture" style="width:%spx;height:%spx;" src="%s">',
-                $settings['author_profile_picture_dimension']['width'],
-                $settings['author_profile_picture_dimension']['height'],
-                $image_url
-            );
+            $settings['author_profile_picture_dimension']['width'] ,
 
+            $settings['author_profile_picture_dimension']['height'] ,
 
-        } else {
+        );
 
-            _e('No Image Has Been Set For Selected Author' , WOOA_TEXT_DOMAIN);
+        echo do_shortcode( $shortcode );
 
-        }
 
     }
 

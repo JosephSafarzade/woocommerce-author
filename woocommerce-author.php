@@ -35,6 +35,8 @@ define('WOOA_ASSETS_JS_FOLDER_URL' , WOOA_ASSETS_FOLDER_URL . "/js" );
 
 define('WOOA_ASSETS_MEDIA_FOLDER_URL' , WOOA_ASSETS_FOLDER_URL . "/media" );
 
+define('WOOA_ASSETS_WEBFONT_FOLDER_URL' , WOOA_ASSETS_FOLDER_URL . "/webfonts" );
+
 
 
 require_once (WOOA_PLUGIN_INC_DIR . "/framework.php");

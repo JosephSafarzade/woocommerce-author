@@ -97,20 +97,21 @@ class wooa_elementor_widget_show_author_username extends \Elementor\Widget_Base
 
     protected function render() {
 
+
         $settings = $this->get_settings_for_display();
 
-        $container = $settings['container_tag'];
+        $shortcode = sprintf(
 
-        $author_id = apply_filters('wooa_return_author_id',$settings['author_id'] );
+            '[wooa_show_author_username author_id="%s" container_tag="%s"][/wooa_show_author_username]',
 
-        $author_username = apply_filters('wooa_show_author_username' , $author_id);
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        printf(
-            "<%s class='wooa-author-username-container'>%s</%s>" ,
-            $container ,
-            $author_username ,
-            $container
+            $settings['container_tag'][0] ,
+
         );
+
+        echo do_shortcode( $shortcode );
+
 
     }
 

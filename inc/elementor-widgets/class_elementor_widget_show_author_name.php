@@ -99,18 +99,17 @@ class wooa_elementor_widget_show_author_name extends \Elementor\Widget_Base
 
         $settings = $this->get_settings_for_display();
 
-        $container = $settings['container_tag'];
+        $shortcode = sprintf(
 
-        $author_id = apply_filters('wooa_return_author_id',$settings['author_id'] );
+            '[wooa_show_author_name author_id="%s" container_tag="%s"][/wooa_show_author_name]',
 
-        $author_name = apply_filters('wooa_show_author_name' , $author_id);
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        printf(
-            "<%s class='wooa-author-name-container'>%s</%s>" ,
-            $container ,
-            $author_name ,
-            $container ,
+            $settings['container_tag'][0]
+
         );
+
+        echo do_shortcode( $shortcode );
 
     }
 

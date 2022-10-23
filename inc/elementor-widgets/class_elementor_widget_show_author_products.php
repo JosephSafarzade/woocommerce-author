@@ -154,30 +154,24 @@ class wooa_elementor_widget_show_author_products extends \Elementor\Widget_Base
 
     protected function render()
     {
+
         $settings = $this->get_settings_for_display();
 
-        $titleTag = $settings['title_tag'];
+        $shortcode = sprintf(
 
-        $settings['author_id'] =  apply_filters('wooa_return_author_id',$settings['author_id'] );
+            '[wooa_show_author_products author_id="%s"  products_columns="%s" products_count="%s" title_tag="%s" /]',
 
-        $products = wooa_core::load_author_products($settings);
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        if (!$products){
+            $settings['products_columns'] ,
 
-            _e('No products has been assigned to this author !' , 'WOOA_TEXT_DOMAIN');
+            $settings['products_count'] ,
 
-        } else {
+            $settings['title_tag'][0]
 
-            printf('<div class="wooa-author-products-container">');
+        );
 
-                wooa_core::generate_author_products_html($products);
-
-            printf('</div>');
-
-
-        }
-
-
+        echo do_shortcode( $shortcode );
 
     }
 

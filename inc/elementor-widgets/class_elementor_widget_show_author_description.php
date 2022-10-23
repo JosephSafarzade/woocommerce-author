@@ -88,7 +88,7 @@ class wooa_elementor_widget_show_author_description extends \Elementor\Widget_Ba
                 'label' => esc_html__('Text Color', WOOA_TEXT_DOMAIN),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .wooa-author-name-container' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .wooa-author-description-container' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -103,20 +103,20 @@ class wooa_elementor_widget_show_author_description extends \Elementor\Widget_Ba
     protected function render()
     {
 
+
         $settings = $this->get_settings_for_display();
 
-        $container = $settings['container_tag'];
+        $shortcode = sprintf(
 
-        $author_id = apply_filters('wooa_return_author_id', $settings['author_id']);
+            '[wooa_show_author_description author_id="%s" container_tag="%s"][/wooa_show_author_description]',
 
-        $author_description = apply_filters('wooa_show_author_description', $author_id);
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        printf(
-            "<%s class='wooa-author-description-container'>%s</%s>",
-            $container,
-            $author_description,
-            $container
+            $settings['container_tag'][0]
+
         );
+
+        echo do_shortcode( $shortcode );
 
     }
 

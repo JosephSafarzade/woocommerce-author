@@ -7,6 +7,8 @@ class wooa_scripts
 
         add_action( 'admin_enqueue_scripts', array($this , 'load_admin_scripts') );
 
+        add_action( 'wp_enqueue_scripts', array($this , 'load_scripts') );
+
     }
 
 
@@ -60,6 +62,14 @@ class wooa_scripts
 
 
 
+
+    }
+
+
+
+    function load_scripts(){
+
+        wp_enqueue_style('wooa-font-awesome' , WOOA_ASSETS_CSS_FOLDER_URL . "/fontawesome.css",[],WOOA_PLUGIN_VERSION,'all');
 
     }
 

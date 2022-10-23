@@ -125,46 +125,64 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
 
         $settings = $this->get_settings_for_display();
 
-        $author_id = apply_filters('wooa_return_author_id', $settings['author_id']);
+        $social_icons = array();
 
+        $social_string = '';
 
         if($settings['social_list']){
 
             foreach ($settings['social_list'] as $item){
 
+
                 $social_name = $item['social_name'];
 
-
                 if($social_name[0] == '0' || $social_name == '0' || $social_name == '') {
-
-                    printf("<p>No Social Name Has Been Selected !</p>");
 
                     continue;
 
                 } else {
 
-                    $social_url = get_post_meta($author_id,"wooa_author_{$social_name}_url",true);
 
-                    ?>
-
-                        <a href="<?php echo esc_url($social_url) ?>" target="_blank" rel="nofollow">
-
-                            <span class="wooa-social-icon-container">
-
-                                <?php \Elementor\Icons_Manager::render_icon( $item['social_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-
-                            </span>
-
-                        </a>
-
-                    <?php
+                    $social_icons[] = array( 'icon'=> $item['social_icon']['value'] , 'name' => $social_name ) ;
 
                 }
 
-
             }
 
+
         }
+
+        $counter = 1;
+
+        foreach ($social_icons as $social_item){
+
+            $social_string .= sprintf(
+                " social_icon_%s_icon='%s' social_icon_%s_name='%s' ",
+                $counter,
+                $social_item['icon'],
+                $counter,
+                $social_item['name']
+
+            );
+
+            $counter++;
+
+        }
+
+
+       $shortcode = sprintf(
+
+            "[wooa_show_author_social_icons author_id='%s'  %s /]",
+
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
+
+            $social_string ,
+
+        );
+
+
+        echo do_shortcode( $shortcode );
+
 
     }
 

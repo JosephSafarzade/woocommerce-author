@@ -85,31 +85,21 @@ class wooa_elementor_widget_show_author_country_flag extends \Elementor\Widget_B
 
         $settings = $this->get_settings_for_display();
 
-        $author_id = apply_filters('wooa_return_author_id',$settings['author_id'] );
+        $shortcode = sprintf(
 
-        $country_code =  get_post_meta($author_id , 'wooa_author_country' , true );
+            '[wooa_show_author_country_flag author_id="%s" container_tag="%s" width="%s" height="%s"][/wooa_show_author_country_flag]',
 
-        $country_flag = 'https://countryflagsapi.com/png/' . $country_code ;
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        if($settings['country_flag_dimension']['width'] != '' && $settings['country_flag_dimension']['height'] != ''){
+            $settings['container_tag'][0] ,
 
-            printf (
-                "<img class='wooa-author-country-flag-image' width='%spx' height='%spx' src='%s' >",
-                esc_attr($settings['country_flag_dimension']['width']) ,
-                esc_attr($settings['country_flag_dimension']['height']) ,
-                $country_flag
-            );
+            $settings['country_flag_dimension']['width'] ,
 
-        } else{
+            $settings['country_flag_dimension']['height']
 
-            printf (
-                "<img class='wooa-author-country-flag-image' src='%s' >"
-                , $country_flag
-            );
+        );
 
-        }
-
-
+        echo do_shortcode( $shortcode );
 
     }
 

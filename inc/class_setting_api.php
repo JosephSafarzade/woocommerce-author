@@ -75,7 +75,7 @@ class wooa_setting_api
             if('' == $_POST['wooa_url_slug'] ){
 
                 $_POST['wooa_url_slug'] = "woocommerce-author";
-                
+
             }
 
             $wooa_url_slug = wp_unslash( $_POST['wooa_url_slug'] );

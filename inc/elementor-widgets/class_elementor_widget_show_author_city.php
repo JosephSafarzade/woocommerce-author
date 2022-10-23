@@ -105,18 +105,18 @@ class wooa_elementor_widget_show_author_city extends \Elementor\Widget_Base
 
         $settings = $this->get_settings_for_display();
 
-        $container = $settings['container_tag'];
+        $shortcode = sprintf(
 
-        $author_id = apply_filters('wooa_return_author_id', $settings['author_id']);
+            '[wooa_show_author_city_name author_id="%s" container_tag="%s"][/wooa_show_author_city_name]',
 
-        $city_name = apply_filters('wooa_return_author_city_name', $author_id);
+            apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-        printf(
-            "<%s class='wooa-author-city-container'>%s</%s>",
-            $container,
-            $city_name,
-            $container
+            $settings['container_tag'][0]
+
         );
+
+        echo do_shortcode( $shortcode );
+
 
     }
 
