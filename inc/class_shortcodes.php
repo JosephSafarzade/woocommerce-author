@@ -11,7 +11,18 @@ class wooa_shortcodes
     }
 
 
-    function add_shortcodes(){
+	/**
+	 * Register woocommerce author shortcodes
+	 *
+	 * in this function we will register all required shortcode to display different property of each author
+	 * these shortcodes can be used in single author post or any other page by using different author id
+	 *
+	 *
+	 * @return void
+	 * @access private
+	 */
+
+    private function add_shortcodes(){
 
         add_shortcode ( 'wooa_show_author_name' , array($this,'wooa_author_name_render') );
 
@@ -23,8 +34,6 @@ class wooa_shortcodes
 
         add_shortcode ( 'wooa_show_author_email' , array($this,'wooa_show_author_email_render') );
 
-        add_shortcode ( 'wooa_show_author_products' , array($this,'wooa_show_author_product_render') );
-
         add_shortcode ( 'wooa_show_author_country_name' , array($this,'wooa_show_author_country_name_render') );
 
         add_shortcode ( 'wooa_show_author_city_name' , array($this,'wooa_show_author_city_name_render') );
@@ -35,7 +44,6 @@ class wooa_shortcodes
 
         add_shortcode ( 'wooa_return_author_poster_url' , array($this,'wooa_return_author_poster_url_render') );
 
-
         add_shortcode ( 'wooa_show_author_profile_picture' , array($this,'wooa_show_author_profile_picture_render') );
 
         add_shortcode ( 'wooa_show_author_products' , array($this,'wooa_show_author_products_render') );
@@ -43,10 +51,25 @@ class wooa_shortcodes
     }
 
 
+
+	/**
+	 * Render woocommerce author name
+	 *
+	 * Use to show author full name ( metadata provided when creating author by site admin )
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'container_tag' => (string) the html tag which should be used to wrap the provided data between. Default : p
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_author_name_render($atts) :void {
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
             'container_tag' => 'p'
         ), $atts, 'wooa_show_author_name' );
 
@@ -64,11 +87,24 @@ class wooa_shortcodes
 
 
 
-
+	/**
+	 * Render woocommerce author username
+	 *
+	 * Use to show author username ( metadata provided when creating author by site admin )
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'container_tag' => (string) the html tag which should be used to wrap the provided data between. Default : p
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_username_render($atts ) :void {
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
             'container_tag' => 'p'
         ), $atts, 'wooa_show_author_username' );
 
@@ -88,10 +124,24 @@ class wooa_shortcodes
 
 
 
+	/**
+	 * Render woocommerce author profession
+	 *
+	 * Use to show author profession ( metadata provided when creating author by site admin )
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'container_tag' => (string) the html tag which should be used to wrap the provided data between. Default : p
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_profession_render($atts){
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
             'container_tag' => 'p'
         ), $atts, 'wooa_show_author_profession' );
 
@@ -111,10 +161,24 @@ class wooa_shortcodes
     }
 
 
+	/**
+	 * Render woocommerce author description
+	 *
+	 * Use to show author description ( metadata provided when creating author by site admin )
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'container_tag' => (string) the html tag which should be used to wrap the provided data between. Default : p
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
      function wooa_show_author_description_render($atts){
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
             'container_tag' => 'p'
         ), $atts, 'wooa_show_author_description' );
 
@@ -130,11 +194,26 @@ class wooa_shortcodes
      }
 
 
-
+	/**
+	 * Render woocommerce author email address
+	 *
+	 * Use to show author email ( metadata provided when creating author by site admin ) , also have an option to set it
+	 * clickable so email app will shows up when user click on it
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'container_tag' => (string) the html tag which should be used to wrap the provided data between. Default : p ( ignored when linkable set to yes )
+	 *          'linkable' => (string) wrap the provided email address in a tag so email app will pop up when user click on email address
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_email_render($atts){
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
             'container_tag' => 'p',
             'linkable'=>'no'
         ), $atts, 'wooa_show_author_email' );
@@ -166,28 +245,27 @@ class wooa_shortcodes
 
 
 
-    function wooa_show_author_product_render($atts){
-
-        $atts = shortcode_atts( array(
-            'author_id' => '0',
-        ), $atts, 'wooa_show_author_products' );
-
-        global $wooa_author_products_ids;
-
-        $wooa_author_products_ids = apply_filters('wooa_return_author_products_id' , $atts['author_id'] );
-
-
-        do_action( 'wooa_show_author_products');
-
-    }
 
 
 
-
+	/**
+	 * Render woocommerce author country
+	 *
+	 * Use to show author country name ( metadata provided when creating author by site admin )
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'container_tag' => (string) the html tag which should be used to wrap the provided data between. Default : p
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_country_name_render($atts) {
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
             'container_tag' => 'p'
         ), $atts, 'wooa_show_author_country_name' );
 
@@ -203,11 +281,26 @@ class wooa_shortcodes
     }
 
 
+
+	/**
+	 * Render woocommerce author city
+	 *
+	 * Use to show author city name ( metadata provided when creating author by site admin )
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'container_tag' => (string) the html tag which should be used to wrap the provided data between. Default : p
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_city_name_render($atts) {
 
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
             'container_tag' => 'p'
         ), $atts, 'wooa_show_author_city_name' );
 
@@ -224,14 +317,30 @@ class wooa_shortcodes
     }
 
 
-
+	/**
+	 * Render woocommerce author country flag
+	 *
+	 * Use to show a png image of assigned country to the author with specific width and height
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'width' => (int) the width of png file in pixel without any prefix or appendix. Default : ''
+	 *          'height' => (int) the height of png file in pixel without any prefix or appendix. Default : ''
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_country_flag_render($atts) {
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
-            'width' => '50',
-            'height' => '50'
+            'author_id' => apply_filters('wooa_return_author_id','0' ) ,
+            'width' => '',
+            'height' => ''
         ), $atts, 'wooa_show_author_country_flag' );
+
+
 
         $country_code =  get_post_meta($atts['author_id'] , 'wooa_author_country' , true );
 
@@ -257,6 +366,8 @@ class wooa_shortcodes
 
 
     }
+
+
 
 
 
@@ -294,10 +405,23 @@ class wooa_shortcodes
 
 
 
+	/**
+	 * Render woocommerce author poster url
+	 *
+	 * Use to show author poster image url ( metadata provided when creating author by site admin )
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *      $atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_return_author_poster_url_render($atts){
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
         ), $atts, 'wooa_return_author_poster_url' );
 
         echo apply_filters('wooa_return_author_poster_url' , $atts['author_id']);
@@ -306,12 +430,28 @@ class wooa_shortcodes
 
 
 
+
+	/**
+	 * Render woocommerce author profile picture
+	 *
+	 * show an image which has been set as feature image of author custom post type
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *		$atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'width' => (int) the width of png file in pixel without any prefix or appendix. Default : ''
+	 *          'height' => (int) the height of png file in pixel without any prefix or appendix. Default : ''
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_profile_picture_render($atts){
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
-            'width'=>'50',
-            'height'=>'50'
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
+            'width'=>'',
+            'height'=>''
         ), $atts, 'wooa_show_author_profile_picture' );
 
 
@@ -338,11 +478,27 @@ class wooa_shortcodes
 
 
 
+	/**
+	 * Render woocommerce author assigned products
+	 *
+	 * get list all products assigned to specific author and then render their boxes so user can click and see the product detail
+	 *
+	 * @param array $atts Array which contain shortcode attribute
+	 *		$atts = [
+	 *          'author_id' => (string) ID of author which you want to fetch data , set 0 or empty to return current author. Default : 0
+	 *          'product_columns' => (int) number of columns in products grid . default : 5
+	 *          'products_count' => (int) number of products to show in products grid . default : 10
+	 *          'title_tag' => (string) the html tag which we wrap the product title in it. Default : 'h5'
+	 *      ]
+	 *
+	 * @return void
+	 * @access public
+	 */
     function wooa_show_author_products_render($atts){
 
         $atts = shortcode_atts( array(
-            'author_id' => '0',
-            'products_columns'=>'50',
+            'author_id' => apply_filters('wooa_return_author_id','0' ),
+            'products_columns'=>'5',
             'products_count'=>'10',
             'title_tag' => 'h5'
         ), $atts, 'wooa_show_author_products' );
