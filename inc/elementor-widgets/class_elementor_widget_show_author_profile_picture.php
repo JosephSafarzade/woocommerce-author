@@ -71,7 +71,7 @@ class wooa_elementor_widget_show_author_profile_picture extends \Elementor\Widge
         $this->add_control(
             'author_profile_picture_border_radius',
             [
-                'label' => esc_html__( 'Width', WOOA_TEXT_DOMAIN ),
+                'label' => esc_html__( 'Border Radius', WOOA_TEXT_DOMAIN ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range' => [

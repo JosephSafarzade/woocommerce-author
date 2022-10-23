@@ -69,7 +69,7 @@ class wooa_shortcodes
 
         $atts = shortcode_atts( array(
             'author_id' => '0',
-            'container_tag'
+            'container_tag' => 'p'
         ), $atts, 'wooa_show_author_username' );
 
 
@@ -95,15 +95,16 @@ class wooa_shortcodes
             'container_tag' => 'p'
         ), $atts, 'wooa_show_author_profession' );
 
+
         printf(
 
             "<%s class='wooa-author-profession-container'>%s</%s>",
 
             $atts['container_tag'],
 
-            apply_filters('wooa_return_author_id', $atts['author_id']),
+            apply_filters('wooa_show_author_profession', $atts['author_id']),
 
-            $atts['container_tag']
+	        $atts['container_tag'],
 
         );
 
@@ -160,8 +161,6 @@ class wooa_shortcodes
             );
 
         }
-
-        echo apply_filters('wooa_show_author_email' , $atts['author_id'] );
 
     }
 
@@ -274,7 +273,7 @@ class wooa_shortcodes
                 $social_url = $author_meta[ "wooa_author_{$social_name}_url" ][0];
 
                 printf(
-                        "<a href='%s' target='_blank' rel='nofollow'>
+                        "<a class='wooa-social-icon-link' href='%s' target='_blank' rel='nofollow'>
                                     <span class='wooa-social-icon-container'>
                                         <i class='%s'></i>
                                     </span>

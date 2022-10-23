@@ -71,7 +71,7 @@ class wooa_elementor_widget_show_author_name extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::SELECT2,
                 'multiple' => false,
                 'options' => wooa_core::return_container_tag_list_for_elementor_widget_setting(),
-                'default' => [ 'p' ],
+                'default' => 'p',
             ]
         );
 

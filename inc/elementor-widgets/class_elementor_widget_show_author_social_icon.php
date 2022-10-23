@@ -67,6 +67,9 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
             ]
         );
 
+
+
+
         $repeater = new \Elementor\Repeater();
 
 
@@ -114,7 +117,77 @@ class wooa_elementor_widget_show_author_social_icon extends \Elementor\Widget_Ba
 
         $this->end_controls_section();
 
-        // Content Tab End
+
+
+	    $this->start_controls_section(
+		    'author-social-icons-style-settings',
+		    [
+			    'label' => esc_html__('Icons Styles', WOOA_TEXT_DOMAIN),
+			    'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+		    ]
+	    );
+
+
+	    $this->add_control(
+		    'icon_size',
+		    [
+			    'label' => esc_html__( 'Icon Size', WOOA_TEXT_DOMAIN ),
+			    'type' => \Elementor\Controls_Manager::NUMBER,
+			    'min' => 20,
+			    'max' => 999,
+			    'default' => 20,
+			    'selectors' => [
+				    '{{WRAPPER}} .wooa-social-icon-container i' => 'font-size: {{VALUE}}px',
+			    ],
+		    ]
+	    );
+
+
+
+	    $this->add_control(
+		    'icon_distance',
+		    [
+			    'label' => esc_html__( 'Icon Distance', WOOA_TEXT_DOMAIN ),
+			    'type' => \Elementor\Controls_Manager::NUMBER,
+			    'min' => 10,
+			    'max' => 100,
+			    'default' => 10,
+			    'selectors' => [
+				    '{{WRAPPER}} .wooa-social-icon-link' => 'padding-right: {{VALUE}}px',
+			    ],
+		    ]
+	    );
+
+
+	    $this->add_control(
+		    'icon_color',
+		    [
+			    'label' => esc_html__('Icon Color', WOOA_TEXT_DOMAIN),
+			    'type' => \Elementor\Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .wooa-social-icon-container i' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+
+
+	    $this->add_control(
+		    'icon_hover_color',
+		    [
+			    'label' => esc_html__('Icon Hover Color', WOOA_TEXT_DOMAIN),
+			    'type' => \Elementor\Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .wooa-social-icon-link:hover i' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+
+	    $this->end_controls_section();
+
+
+	    // Content Tab End
 
 
     }

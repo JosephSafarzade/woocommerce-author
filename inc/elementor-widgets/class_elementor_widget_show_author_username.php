@@ -71,7 +71,7 @@ class wooa_elementor_widget_show_author_username extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::SELECT2,
                 'multiple' => false,
                 'options' => wooa_core::return_container_tag_list_for_elementor_widget_setting(),
-                'default' => [ 'p' ],
+                'default' => 'p',
             ]
         );
 
@@ -102,11 +102,11 @@ class wooa_elementor_widget_show_author_username extends \Elementor\Widget_Base
 
         $shortcode = sprintf(
 
-            '[wooa_show_author_username author_id="%s" container_tag="%s"][/wooa_show_author_username]',
+            '[wooa_show_author_username author_id="%s" container_tag="%s" /]',
 
             apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-            $settings['container_tag'][0] ,
+            $settings['container_tag'] ,
 
         );
 

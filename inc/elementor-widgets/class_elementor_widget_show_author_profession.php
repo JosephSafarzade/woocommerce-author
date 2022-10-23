@@ -78,7 +78,7 @@ class wooa_elementor_widget_show_author_profession extends \Elementor\Widget_Bas
                 'type' => \Elementor\Controls_Manager::SELECT2,
                 'multiple' => false,
                 'options' => wooa_core::return_container_tag_list_for_elementor_widget_setting(),
-                'default' => ['p'],
+                'default' => 'p',
             ]
         );
 
@@ -103,7 +103,10 @@ class wooa_elementor_widget_show_author_profession extends \Elementor\Widget_Bas
     protected function render()
     {
 
+
+
         $settings = $this->get_settings_for_display();
+
 
         $shortcode = sprintf(
 
@@ -111,7 +114,7 @@ class wooa_elementor_widget_show_author_profession extends \Elementor\Widget_Bas
 
             apply_filters('wooa_return_author_id',$settings['author_id'] ) ,
 
-            $settings['container_tag'][0] ,
+            $settings['container_tag'] ,
 
         );
 

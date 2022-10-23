@@ -73,3 +73,27 @@ padding-right: 6px;
     }
   }
 }
+
+
+
+.elementor-widget-wooa_show_author_description ,
+.elementor-widget-wooa_show_author_profile_picture ,
+.elementor-widget-wooa_show_author_name ,
+.elementor-widget-wooa_show_author_username ,
+.elementor-widget-wooa_show_author_profession ,
+.elementor-widget-wooa_show_author_email ,
+.elementor-widget-wooa_show_author_country ,
+.elementor-widget-wooa_show_author_city ,
+.elementor-widget-wooa_show_author_country_flag ,
+.elementor-widget-wooa_show_author_social_icon{
+
+  margin-bottom: 0 !important;
+
+  p,h1,h2,h3,h4,h5,h6{
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important ;
+  }
+
+}

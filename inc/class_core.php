@@ -865,33 +865,43 @@ class wooa_core
 
     function handle_template_redirect_hook() : void {
 
-
-        if ( is_404() ){
-
-            $current_url = $this->get_full_url();
-
-            $is_correct_url_structure_loaded = $this->check_for_right_url_structure( $current_url );
+        if(is_single() && get_post_type() == 'woocommerce-author') {
 
 
-            if ( $is_correct_url_structure_loaded ) {
 
-                $author_name = basename($current_url);
+        } else {
 
-                $author_id = $this->check_if_author_exist ( $author_name );
+	        if ( is_404() ){
 
-                if( $author_id != 0 ){
+		        $current_url = $this->get_full_url();
 
-                    $this->setup_initial_post_data($author_id);
-
-                    $this->load_author_template_file();
-
-                }
+		        $is_correct_url_structure_loaded = $this->check_for_right_url_structure( $current_url );
 
 
-            }
+		        if ( $is_correct_url_structure_loaded ) {
 
+			        $author_name = basename($current_url);
+
+			        $author_id = $this->check_if_author_exist ( $author_name );
+
+			        if( $author_id != 0 ){
+
+				        $this->setup_initial_post_data($author_id);
+
+				        $this->load_author_template_file();
+
+			        }
+
+
+		        }
+
+
+	        }
 
         }
+
+
+
 
     }
 

@@ -198,21 +198,35 @@ class wooa_admin_inputs
 
         $supported_post_types  = get_option('elementor_cpt_support');
 
+		$is_elementor_active = did_action( 'elementor/loaded' );
+
         $admin_url = get_admin_url( null , 'admin.php') . "?page=elementor";
 
-        if(empty($supported_post_types) || $supported_post_types == ''){
 
-            return;
+		if($is_elementor_active == '1' && $supported_post_types == false){
 
-        }else{
+			printf('<strong>Notice : Please visit <a href="%s">following page</a> to enable elementor for WooCommerce Author post type</strong>',$admin_url);
 
-            if(!in_array('woocommerce-author',$supported_post_types)){
+		} else {
 
-                printf('<strong>Notice : Please visit <a href="%s">following page</a> to enable elementor for WooCommerce Author post type</strong>',$admin_url);
+			if(empty($supported_post_types) || $supported_post_types == ''){
 
-            }
+				return;
 
-        }
+			}else{
+
+				if(!in_array('woocommerce-author',$supported_post_types)){
+
+					printf('<strong>Notice : Please visit <a href="%s">following page</a> to enable elementor for WooCommerce Author post type</strong>',$admin_url);
+
+				}
+
+			}
+
+		}
+
+
+
 
 
 
