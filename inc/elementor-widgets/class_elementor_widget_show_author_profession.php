@@ -1,35 +1,99 @@
 <?php
 
-
+/**
+ * wooa_elementor_widget_show_author_profession class.
+ *
+ * a class to register custom elementor widget which extends Widget_Base class of Elementor namespace
+ *
+ * @package wooa_elementor_widget_show_author_profession
+ * @extends \Elementor\Widget_Base
+ * @version 1.0
+ *
+ */
 class wooa_elementor_widget_show_author_profession extends \Elementor\Widget_Base
 {
 
+    /**
+     *
+     * Return widget name which will be used by elementor itself
+     *
+     * @return string name of widget
+     *
+     */
     public function get_name()
     {
         return 'wooa_show_author_profession';
     }
 
+
+    /**
+     *
+     * Return widget name which will appear in elementor builder
+     *
+     * @return string title of widget
+     *
+     */
     public function get_title()
     {
         return esc_html__('Show Author Profession', WOOA_TEXT_DOMAIN);
     }
 
+
+    /**
+     *
+     * Return widget icon name which will appear in elementor builder
+     *
+     * @return string icon of widget
+     *
+     */
     public function get_icon()
     {
         return 'eicon-code';
     }
 
+
+    /**
+     *
+     * Return widget categories which will be used in elementor builder search and grid of widget names
+     *
+     * @return array array which contains category name assigned to this widget
+     *
+     */
     public function get_categories()
     {
         return ['basic'];
     }
 
+
+    /**
+     *
+     * Return widget keywords which will be used in elementor builder search and grid of widget names
+     *
+     * @return array array which contains keywords name assigned to this widget
+     *
+     */
     public function get_keywords()
     {
         return ['author', 'name', 'woocommerce'];
     }
 
 
+
+    /**
+     *
+     * Register required setting for widget
+     *
+     * list of settings :
+     *
+     * author_id (string) id of author which we should fetch data from
+     * container_tag (string) a html tag which we should wrap data in it
+     * container_color (string) color of text which is showing fetched data
+     *
+     *
+     *
+     * @return void
+     *
+     */
     protected function register_controls()
     {
 
@@ -99,7 +163,17 @@ class wooa_elementor_widget_show_author_profession extends \Elementor\Widget_Bas
 
     }
 
-
+    /**
+     *
+     * Render widget output for users
+     *
+     * in this function first we will fetch saved setting for widget by using get_settings_for_display function then
+     * we will call wooa_show_author_profession shortcode with required parameters
+     *
+     *
+     * @return void
+     *
+     */
     protected function render()
     {
 
@@ -127,6 +201,6 @@ class wooa_elementor_widget_show_author_profession extends \Elementor\Widget_Bas
 
 }
 
-
+/* Register widget by elementor */
 $widgets_manager->register(new \wooa_elementor_widget_show_author_profession());
 

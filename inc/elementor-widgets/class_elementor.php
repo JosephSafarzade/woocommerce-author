@@ -1,12 +1,40 @@
 <?php
 
+
+/**
+ * wooa_elementor class.
+ *
+ * @package wooa_elementor
+ * @version 1.0
+ */
+
+
 class wooa_elementor{
 
+    /**
+     *  Class construction
+     *
+     *  Only call current class load_widgets function on elementor/widgets/register action to start registering elementor widget
+     *
+     *  @return void
+     *
+     */
     function __construct(){
 
         add_action('elementor/widgets/register' , array($this,'load_widgets') );
 
     }
+
+
+    /**
+     *
+     *  Load widget function to register custom elementor widgets
+     *
+     *  This function has an array which contains name of widget files which should be loaded , then
+     *  it will load each file separately from elementor-widget folder
+     *
+     * @return void
+     */
 
     public function load_widgets($widgets_manager){
 
@@ -36,7 +64,11 @@ class wooa_elementor{
 
 }
 
-
+/**
+ *
+ *  Create a clone of wooa_elementor class if elementor plugin is activated
+ *
+ */
 add_action('init',function(){
 
     if (is_plugin_active( 'elementor/elementor.php' )) {
