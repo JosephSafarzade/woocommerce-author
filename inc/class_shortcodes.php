@@ -353,7 +353,7 @@ class wooa_shortcodes
             printf (
                 "<img class='wooa-author-country-flag-image' width='%spx' height='%spx' src='%s' >",
                 esc_attr($atts['width']) ,
-                esc_attr($atts['width']) ,
+                esc_attr($atts['height']) ,
                 $country_flag
             );
 
