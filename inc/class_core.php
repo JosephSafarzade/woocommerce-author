@@ -1,11 +1,29 @@
 <?php
 
-
+/**
+ * wooa_core class.
+ *
+ * This class is created to have some core functionality which will be used across our plugin
+ *
+ * @package wooa_core
+ * @version 1.0
+ *
+ */
 class wooa_core
 {
 
 
-    function setup_initial_post_data(int $author_id){
+	/**
+	 *
+	 * Setup author data as global $post variable to be accessed later by other functions
+	 *
+	 * @param int $author_id
+	 *
+	 * @return void
+	 *
+	 *
+	 */
+    function setup_initial_post_data(int $author_id) : void {
 
         status_header(200);
 
@@ -18,9 +36,10 @@ class wooa_core
     }
 
 
+
     function load_author_template_file() : void {
 
-        $template_path = locate_template('woocommerce-author/wooa-single-woocommerce-author.php') != '' ? locate_template('woocommerce-author/wooa-single-woocommerce-author.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-single-woocommerce-author.php' ;
+        $template_path = locate_template('single-woocommerce-author.php') != '' ? locate_template('single-woocommerce-author.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'single-woocommerce-author.php' ;
 
         require_once ( $template_path );
 
@@ -29,8 +48,16 @@ class wooa_core
     }
 
 
-
-
+	/**
+	 *
+	 * Check if author exist by have a query in database by using author name
+	 *
+	 * @param string $author_name name of author we are searching for
+	 *
+	 * @return int number of founded authors
+	 *
+	 *
+	 */
     function check_if_author_exist( string $author_name ) : int {
 
         $args = array(
@@ -53,7 +80,12 @@ class wooa_core
     }
 
 
-
+	/**
+	 *
+	 * Get current page full URL
+	 *
+	 * @return string
+	 */
     function get_full_url() : string {
 
         return   (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ;
@@ -82,10 +114,17 @@ class wooa_core
     }
 
 
-
-
-
-    static function return_all_authors_for_admin_panel_input(){
+	/**
+	 *
+	 * Return list of authors for admin panel
+	 *
+	 * In our admin panel we need to have a list of authors to be shown in select input so users can choose between
+	 * them , this function will run a query through database and return the value.
+	 *
+	 * @return array
+	 *
+	 */
+    static function return_all_authors_for_admin_panel_input():array {
 
         $authors = array(
             '0' => __('No Author',WOOA_TEXT_DOMAIN )
@@ -109,38 +148,7 @@ class wooa_core
 
 
 
-    public function show_author_products_container(){
 
-        $template_path = locate_template('woocommerce-author/wooa-author-products-container.php') != '' ? locate_template('woocommerce-author/wooa-author-products-container.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-author-products-container.php' ;
-
-        require_once ( $template_path );
-
-        return;
-
-    }
-
-
-
-    public function show_author_product_box(){
-
-        global $wooa_author_products_ids;
-
-        $template_path = locate_template('woocommerce-author/wooa-author-product-box.php') != '' ? locate_template('woocommerce-author/wooa-author-product-box.php') :  WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-author-product-box.php' ;
-
-        foreach ($wooa_author_products_ids as $product_id){
-
-            global $post;
-
-            $post = get_post($product_id);
-
-            require($template_path);
-
-            wp_reset_postdata();
-
-        }
-
-
-    }
 
 
 
@@ -778,10 +786,6 @@ class wooa_core
 
     function return_author_username_by_id($author_id){
 
-        global $post;
-
-        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
-
         $author_username = get_post_meta($author_id , 'wooa_author_username' , true );
 
         return  $author_username != '' && $author_username != false ?  esc_attr( $author_username ) : false ;
@@ -792,10 +796,6 @@ class wooa_core
 
 
     function return_author_profession_by_id($author_id){
-
-        global $post;
-
-        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
         $author_profession = get_post_meta($author_id , 'wooa_author_profession' , true );
 
@@ -808,9 +808,6 @@ class wooa_core
 
     function return_author_description_by_id($author_id){
 
-        global $post;
-
-        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
         $author_description = get_post_meta($author_id , 'wooa_author_description' , true );
 
@@ -822,9 +819,6 @@ class wooa_core
 
     function return_author_email_by_id($author_id){
 
-        global $post;
-
-        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
         $author_email_address = get_post_meta($author_id , 'wooa_author_email_address' , true );
 
@@ -836,10 +830,6 @@ class wooa_core
 
     function return_author_products_id( $author_id ){
 
-
-        global $post;
-
-        $author_id = $author_id == '0' || $author_id == '' ? get_post_meta ( $post->ID , 'wooa_product_author_id' , true ) : $author_id;
 
         $args = array(
             'post_type' => 'product',
@@ -867,7 +857,7 @@ class wooa_core
 
         if(is_single() && get_post_type() == 'woocommerce-author') {
 
-
+	        $this->load_author_template_file();
 
         } else {
 
@@ -876,7 +866,6 @@ class wooa_core
 		        $current_url = $this->get_full_url();
 
 		        $is_correct_url_structure_loaded = $this->check_for_right_url_structure( $current_url );
-
 
 		        if ( $is_correct_url_structure_loaded ) {
 
@@ -961,34 +950,6 @@ class wooa_core
         }
 
     }
-
-
-    function return_product_author_id($product_id){
-
-        $author_id = get_post_meta($product_id , 'wooa_product_author_id' , true );
-
-        return $author_id != '' ? esc_attr($author_id) : false;
-
-
-    }
-
-
-    function return_product_author_name($product_id){
-
-        $author_id = apply_filters('wooa_return_product_author_id' , $product_id );
-
-        if ( !$author_id ){
-
-            return false;
-
-        } else {
-
-            return apply_filters('wooa_show_author_name' , $author_id );
-
-        }
-
-    }
-
 
 
     static function return_author_list_for_elementor_widget_setting(){
@@ -1092,6 +1053,13 @@ class wooa_core
         }
 
 
+		if(is_404()){
+
+			return get_the_ID();
+
+		}
+
+
         return $author_id;
 
 
@@ -1166,37 +1134,8 @@ class wooa_core
 
     static public function generate_single_product_box_html($product_data){
 
-        ?>
-            <div class="wooa-product-item-style-1  <?php echo $product_data['is_sale'] ? 'is-sale' : '' ?>">
+        require (WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-single-product-box.php');
 
-                    <a href="<?php echo $product_data['url'] ?>" title="<?php echo $product_data['title'] ?>" class="wooa-product-item-style-1__image-container">
-
-                        <?php echo $product_data['is_sale'] ? '<span>Sale</span>' : '' ?>
-
-                        <?php echo $product_data['image'] ?>
-
-                    </a>
-
-                    <a href="<?php echo $product_data['url'] ?>" title="<?php echo $product_data['title'] ?>" class="wooa-product-item-style-1__content">
-
-                       <h5 class="wooa-product-item-style-1__title"><?php echo $product_data['title'] ?></h5>
-
-                        <div class="wooa-product-item-style-1__prices">
-
-                            <div class="wooa-product-item-style-1__regular-price"><?php echo $product_data['currency'] . $product_data['regular_price'] ?></div>
-
-                            <div class="wooa-product-item-style-1__sale-price"><?php echo $product_data['currency'] . $product_data['sale_price'] ?></div>
-
-                        </div>
-
-                    </a>
-
-                     <div class="wooa-product-item-style-1__add-to-cart"> <a><?php _e('ADD TO CART',WOOA_TEXT_DOMAIN) ?></a></div>
-            </div>
-
-
-
-        <?php
     }
 
 

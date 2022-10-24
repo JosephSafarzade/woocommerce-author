@@ -1,5 +1,11 @@
 <?php
 
+/**
+ *
+ *  Check if Woocommerce is activated as our plugin require this plugin to be active and then load core files , if the
+ *  Woocommerce plugin is not active we will show a notice to our user
+ *
+ */
 $woocommerce_installed = in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) );
 
 if ( $woocommerce_installed ) {

@@ -1,8 +1,23 @@
 <?php
 
+/**
+ * wooa_scripts class.
+ *
+ * This class is for registering and enqueue of styles and scripts used in our plugin
+ *
+ * @package wooa_scripts
+ * @version 1.0
+ *
+ */
 class wooa_scripts
 {
 
+	/**
+	 *
+	 * Class constructor function which call 'load_admin_scripts' to load script and styles in admin area and call
+	 * 'load_scripts' to load script and styles in frontend area
+	 *
+	 */
     function __construct(){
 
         add_action( 'admin_enqueue_scripts', array($this , 'load_admin_scripts') );
@@ -11,8 +26,20 @@ class wooa_scripts
 
     }
 
+	/**
+	 *
+	 * Load script and styles in admin area
+	 *
+	 * First it will check current page to see if it should load its own script and styles and then start to enqueue
+	 * style and scripts
+	 *
+	 *
+	 *
+	 * @return void
+	 *
+	 */
 
-    function load_admin_scripts(){
+    function load_admin_scripts():void{
 
         global $current_screen;
 
@@ -57,18 +84,16 @@ class wooa_scripts
 
         }
 
-
-
-
-
-
-
-
     }
 
 
-
-    function load_scripts(){
+	/**
+	 *
+	 * Load our general style file which we use to style our shortcode and widgets
+	 *
+	 * @return void
+	 */
+    function load_scripts():void{
 
         wp_enqueue_style('wooa-font-awesome' , WOOA_ASSETS_CSS_FOLDER_URL . "/fontawesome.css",[],WOOA_PLUGIN_VERSION,'all');
 
@@ -76,7 +101,7 @@ class wooa_scripts
 
 }
 
-
+/* Create a clone of wooa_scripts class */
 if( class_exists('wooa_scripts') ){
 
     $wooa_scripts = new wooa_scripts();

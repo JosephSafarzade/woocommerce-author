@@ -183,6 +183,8 @@ class wooa_shortcodes
         ), $atts, 'wooa_show_author_description' );
 
 
+
+
          printf(
              "<%s class='wooa-author-description-container'>%s</%s>",
              $atts['container_tag'],

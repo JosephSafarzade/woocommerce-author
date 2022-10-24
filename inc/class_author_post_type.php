@@ -1,15 +1,42 @@
 <?php
 
+/**
+ * wooa_author_post_type class.
+ *
+ * This class is for registering woocommerce-author post type
+ *
+ * @package wooa_admin_inputs
+ * @version 1.0
+ *
+*/
 class wooa_author_post_type
 {
 
+	/**
+	 *
+	 * Class constructor function which call 'register_woocommerce_author_post_type' function on 'init' action
+	 *
+	 *
+	 */
     public function __construct(){
 
         add_action( 'init' , array( $this , 'register_woocommerce_author_post_type' ) );
 
     }
 
-    public function register_woocommerce_author_post_type(){
+
+	/**
+	 *
+	 * Register woocommerce-author post type
+	 *
+	 * First it will get 'wooa_url_slug' option which is a url slug for this post type that users can change in admin
+	 * panel >> settings >> permalink , then it will set a default value for it , then we set label and args for
+	 * 'register_post_type' function to register our custom post type named 'woocommerce-author'
+	 *
+	 * @return void
+	 *
+	 */
+    public function register_woocommerce_author_post_type():void{
 
         $wooa_detail_slug = get_option('wooa_url_slug') ;
 
@@ -68,6 +95,7 @@ class wooa_author_post_type
 
 }
 
+/* Creating a clone of wooa_author_post_type class */
 if ( !post_type_exists('woocommerce-author') && class_exists('wooa_author_post_type') ){
 
     $wooa_author_post_type = new wooa_author_post_type();

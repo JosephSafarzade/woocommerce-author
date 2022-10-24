@@ -1,8 +1,23 @@
 <?php
 
+/**
+ * wooa_setting_api class.
+ *
+ * This class is for registering a setting in wordpress setting api to save our custom post type URL slug
+ *
+ * @package wooa_setting_api
+ * @version 1.0
+ *
+ */
 class wooa_setting_api
 {
 
+	/**
+	 *
+	 * Class constructor function to call 'register_wooa_permalink_setting' and 'save_wooa_permalink_settings' on
+	 * 'admin_init' action
+	 *
+	 */
     public function __construct(){
 
         add_action( 'admin_init', array($this,'register_wooa_permalink_setting') );
@@ -12,7 +27,16 @@ class wooa_setting_api
     }
 
 
-    public function register_wooa_permalink_setting(){
+	/**
+	 *
+	 * Register our setting
+	 *
+	 * First we register a setting named 'wooa_url_slug' , then we add a setting section on wordpress permalink setting
+	 * panel , then we add our setting field to that registered section
+	 *
+	 * @return void
+	 */
+    public function register_wooa_permalink_setting():void{
 
 
         register_setting(
@@ -47,7 +71,13 @@ class wooa_setting_api
     }
 
 
-    public function render_permalink_setting_section(){
+	/**
+	 *
+	 * Render the html content of our setting section ( use to show a brief description about our setting )
+	 *
+	 * @return void
+	 */
+    public function render_permalink_setting_section():void{
 
         $example_url = get_site_url() . "/author/sample-author";
 
@@ -56,7 +86,15 @@ class wooa_setting_api
     }
 
 
-    public function render_permalink_setting_field_input_render(){
+	/**
+	 *
+	 * Render our html input which is responsible to get the value from user for custom url slug of 'woocommerce-author'
+	 * post type
+	 *
+	 * @return void
+	 *
+	 */
+    public function render_permalink_setting_field_input_render():void{
 
         $setting = get_option('wooa_url_slug');
 
@@ -67,8 +105,18 @@ class wooa_setting_api
     }
 
 
-
-    function save_wooa_permalink_settings(){
+	/**
+	 *
+	 * Save entered value for custom url slug
+	 *
+	 * It will check if we are saving procedure of permalink setting by checking $_POST['permalink_structure'] and then
+	 * it will save our custom URL slug of 'woocomemrce-author' post in 'wooa_url_slug' option to use in registering
+	 * custom post type
+	 *
+	 * @return void
+	 *
+	 */
+    function save_wooa_permalink_settings():void{
 
         if( isset($_POST['permalink_structure']) && isset( $_POST['wooa_url_slug'] ) ){
 
@@ -89,7 +137,7 @@ class wooa_setting_api
 }
 
 
-
+/* Creating a clone of wooa_setting_api class */
 if( class_exists('wooa_setting_api') ){
 
     $wooa_setting_api = new wooa_setting_api();

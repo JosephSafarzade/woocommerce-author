@@ -1,15 +1,40 @@
 <?php
 
-
+/**
+ * wooa_admin_inputs class.
+ *
+ * This class is for output html content of inputs that we use in admin panel for settings
+ *
+ * @package wooa_admin_inputs
+ * @version 1.0
+ */
 class wooa_admin_inputs
 {
 
-    function __construct(){}
 
-
-    function render_admin_input(array $input_config){
-
-
+	/**
+	 *
+	 * render admin inputs
+	 *
+	 * Accept an array which contain an input config file then base on input type it will call specific function to
+	 * continue rendering html content of the input
+	 *
+	 * @param array $input_config
+	 *      $input_config = [
+	 *          'type' => (string) type of input to be rendered ( 'check_elementor' , 'textbox' , 'textarea' , 'select' , 'media' , 'url' , 'email' ) ,
+	 *          'name' => (string) name of input which will be used in name attribute of html input ,
+	 *          'label' => (string) label which will be shown separately as a label tag for the input,
+	 *          'class' => (string) classes to be added to class attribute of html input ( separate by space )
+	 *          'id' => (string) ID of input which will be used for its label and input itself id attribute
+	 *          'placeholder' => (string) show a placeholder when there is no value set ( if input support placeholder )
+	 *          'value' => (string|array) a value which will be show in input
+	 *      ]
+	 *
+	 *
+	 * @access public
+	 * @return void
+	 */
+    function render_admin_input(array $input_config):void{
 
         switch ($input_config['type']) {
 
@@ -48,9 +73,26 @@ class wooa_admin_inputs
     }
 
 
-
-
-    function render_textbox_input(array $input_config){
+	/**
+	 *
+	 * Render textbox html input
+	 *
+	 * Accept an array of input config and then base on that it will render an input type 'text'
+	 *
+	 *	@param array $input_config
+	 *      $input_config = [
+	 *          'name' => (string) name of input which will be used in name attribute of html input ,
+	 *          'class' => (string) classes to be added to class attribute of html input ( separate by space ) ,
+	 *          'label' => (string) label which will be shown separately as a label tag for the input,
+	 *          'id' => (string) ID of input which will be used for its label and input itself id attribute
+	 *          'placeholder' => (string) show a placeholder when there is no value set ( if input support placeholder )
+	 *          'value' => (string) a value which will be show in input
+	 *      ]
+	 *
+	 * @return void
+	 *
+	 */
+    function render_textbox_input(array $input_config):void{
 
         printf(
             "<div class='wooa-admin-input-container'>
@@ -71,7 +113,26 @@ class wooa_admin_inputs
 
 
 
-    function render_email_input(array $input_config){
+	/**
+	 *
+	 * Render email html input
+	 *
+	 * Accept an array of input config and then base on that it will render an input type 'email'
+	 *
+	 *	@param array $input_config
+	 *      $input_config = [
+	 *          'name' => (string) name of input which will be used in name attribute of html input ,
+	 *          'class' => (string) classes to be added to class attribute of html input ( separate by space ) ,
+	 *          'label' => (string) label which will be shown separately as a label tag for the input,
+	 *          'id' => (string) ID of input which will be used for its label and input itself id attribute
+	 *          'placeholder' => (string) show a placeholder when there is no value set ( if input support placeholder )
+	 *          'value' => (string) a value which will be show in input
+	 *      ]
+	 *
+	 * @return void
+	 *
+	 */
+    function render_email_input(array $input_config):void{
 
         printf(
             "<div class='wooa-admin-input-container'>
@@ -92,10 +153,26 @@ class wooa_admin_inputs
 
 
 
-    function render_url_input(array $input_config){
-
-
-
+	/**
+	 *
+	 * Render URL html input
+	 *
+	 * Accept an array of input config and then base on that it will render an input type 'url'
+	 *
+	 *	@param array $input_config
+	 *      $input_config = [
+	 *          'name' => (string) name of input which will be used in name attribute of html input ,
+	 *          'class' => (string) classes to be added to class attribute of html input ( separate by space ) ,
+	 *          'label' => (string) label which will be shown separately as a label tag for the input,
+	 *          'id' => (string) ID of input which will be used for its label and input itself id attribute
+	 *          'placeholder' => (string) show a placeholder when there is no value set ( if input support placeholder )
+	 *          'value' => (string) a value which will be show in input
+	 *      ]
+	 *
+	 * @return void
+	 *
+	 */
+    function render_url_input(array $input_config):void{
 
         printf(
             "<div class='wooa-admin-input-container'>
@@ -117,8 +194,28 @@ class wooa_admin_inputs
 
 
 
-
-    function render_media_upload_input(array $input_config){
+	/**
+	 *
+	 * Render upload file html input
+	 *
+	 * It will create an input for showing the url of uploaded image , a hidden input which save the attachment ID of
+	 * uploaded image , and the two button input to show upload panel and reset the input values
+	 *
+	 *	@param array $input_config
+	 *      $input_config = [
+	 *          'name' => (string) name of input which will be used in name attribute of html input ,
+	 *          'class' => (string) classes to be added to class attribute of html input ( separate by space ) ,
+	 *          'label' => (string) label which will be shown separately as a label tag for the input,
+	 *          'id' => (string) ID of input which will be used for its label and input itself id attribute
+	 *          'placeholder' => (string) show a placeholder when there is no value set ( if input support placeholder )
+	 *          'value' => (string) Attachment ID of selected image
+	 *          'value-url' => (string) URL of selected image
+	 *      ]
+	 *
+	 * @return void
+	 *
+	 */
+    function render_media_upload_input(array $input_config):void{
 
         $input_config['value-url'] = $input_config['value'] != '' ? wp_get_attachment_url($input_config['value']) : '' ;
 
@@ -147,7 +244,27 @@ class wooa_admin_inputs
 
 
 
-    function render_select_input(array $input_config){
+	/**
+	 *
+	 * Render select html input
+	 *
+	 * Accept an array of input config and then base on that it will render an input type 'select'
+	 *
+	 *	@param array $input_config
+	 *      $input_config = [
+	 *          'name' => (string) name of input which will be used in name attribute of html input ,
+	 *          'class' => (string) classes to be added to class attribute of html input ( separate by space ) ,
+	 *          'label' => (string) label which will be shown separately as a label tag for the input,
+	 *          'id' => (string) ID of input which will be used for its label and input itself id attribute
+	 *          'placeholder' => (string) show a placeholder when there is no value set ( if input support placeholder )
+	 *          'value' => (array) array which the key of each item will be used as item value in select input and the
+	 *                             value of each array item will be shown as a label in select input
+	 *      ]
+	 *
+	 * @return void
+	 *
+	 */
+    function render_select_input(array $input_config):void{
 
 
         printf('<div class="wooa-admin-input-container">');
@@ -172,8 +289,26 @@ class wooa_admin_inputs
 
 
 
-
-    function render_textarea_input(array $input_config){
+	/**
+	 *
+	 * Render textarea html input
+	 *
+	 * Accept an array of input config and then base on that it will render an input type 'textarea'
+	 *
+	 *	@param array $input_config
+	 *      $input_config = [
+	 *          'name' => (string) name of input which will be used in name attribute of html input ,
+	 *          'class' => (string) classes to be added to class attribute of html input ( separate by space ) ,
+	 *          'label' => (string) label which will be shown separately as a label tag for the input,
+	 *          'id' => (string) ID of input which will be used for its label and input itself id attribute
+	 *          'placeholder' => (string) show a placeholder when there is no value set ( if input support placeholder )
+	 *          'value' => (string) a value which will be show in input
+	 *      ]
+	 *
+	 * @return void
+	 *
+	 */
+    function render_textarea_input(array $input_config):void{
 
 
         printf(
@@ -194,7 +329,20 @@ class wooa_admin_inputs
     }
 
 
-    function render_check_elementor_input(){
+	/**
+	 *
+	 * Render custom html section for checking elementor being active
+	 *
+	 * This input act as a html section which will check if elementor plugin is active and then if it configured to be
+	 * available for woocommerce-author post type too , if it is not configured correctly we will show a notice which
+	 * guide user what to do about it
+	 *
+	 *
+
+	 * @return void
+	 *
+	 */
+    function render_check_elementor_input():void{
 
         $supported_post_types  = get_option('elementor_cpt_support');
 
@@ -224,11 +372,6 @@ class wooa_admin_inputs
 			}
 
 		}
-
-
-
-
-
 
     }
 

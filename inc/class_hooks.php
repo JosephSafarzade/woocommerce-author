@@ -1,11 +1,26 @@
 <?php
 
+/**
+ * wooa_hooks class.
+ *
+ * This class is created to handle actions and filters in our plugin
+ *
+ * @package wooa_hooks
+ * @version 1.0
+ *
+ */
 
 class wooa_hooks
 {
 
     private $wooa_core;
 
+	/**
+	 *
+	 * Class constructor function which create a clone of 'wooa_core' class and then call 'define_hooks' function
+	 *
+	 *
+	 */
     function __construct(){
 
         $this->wooa_core = new wooa_core();
@@ -15,7 +30,14 @@ class wooa_hooks
     }
 
 
-    function define_hooks(){
+	/**
+	 *
+	 * Define all actions and filters used in our plugin
+	 *
+	 * @return void
+	 *
+	 */
+    function define_hooks():void{
 
 
         add_filter('wooa_show_author_name' , array($this->wooa_core,'return_author_name_by_id') );
@@ -30,11 +52,7 @@ class wooa_hooks
 
         add_filter('wooa_return_author_products_id' , array($this->wooa_core,'return_author_products_id') );
 
-        add_action('wooa_show_author_products_container' , array($this->wooa_core , 'show_author_products_container') );
-
         add_action('template_redirect' , array($this->wooa_core,'handle_template_redirect_hook') );
-
-        add_action('wooa_show_author_products' , array($this->wooa_core , 'show_author_product_box') );
 
         add_filter('wp_title', array($this->wooa_core,'modify_woocommerce_author_detail_title') , 999999 , 3 );
 
@@ -52,10 +70,6 @@ class wooa_hooks
 
         add_filter('wooa_return_author_detail_url' , array($this->wooa_core , 'return_author_detail_url') ,10 , 1 );
 
-        add_filter('wooa_return_product_author_id' , array($this->wooa_core , 'return_product_author_id') , 10 , 1 );
-
-        add_filter('wooa_return_product_author_name' , array($this->wooa_core , 'return_product_author_name') , 10 , 1 );
-
         add_filter('wooa_return_author_id' , array($this->wooa_core , 'return_author_id') , 10 , 1 );
 
     }
@@ -63,6 +77,7 @@ class wooa_hooks
 
 }
 
+/* Create a clone of wooa_hooks class */
 if( class_exists('wooa_hooks') ){
 
     $wooa_hooks = new wooa_hooks();

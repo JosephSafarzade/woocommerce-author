@@ -1,11 +1,28 @@
 <?php
 
-
+/**
+ *
+ * Class to register and show our setting meta box in product and woocommerce author post type editing panel
+ *
+ * @package wooa_meta_boxes
+ * @version 1.0
+ *
+ */
 class wooa_meta_boxes
 {
 
     private $wooa_admin_inputs;
 
+
+	/**
+	 *
+	 * Class constructor class which call 'create_woocommerce_author_info_metabox' on 'add_meta_boxes' action to
+	 * register our meta boxes and then call 'save_woocommerce_author_info_metabox' and
+	 * 'save_woocommerce_assign_author_metabox' to have function to handle saving procedure our
+	 * custom meta boxes data , also we create a clone of 'wooa_admin_inputs' class to handle html rendering of our
+	 * meta boxes inputs
+	 *
+	 */
     public function __construct(){
 
         add_action( 'add_meta_boxes', array( $this, 'create_woocommerce_author_info_metabox' ) );
@@ -14,15 +31,26 @@ class wooa_meta_boxes
 
         add_action( 'save_post',  array( $this, 'save_woocommerce_assign_author_metabox' ) );
 
-
-
         $this->wooa_admin_inputs = new wooa_admin_inputs();
 
     }
 
 
-
-    function create_woocommerce_author_info_metabox($post_type){
+	/**
+	 *
+	 * Register our meta boxes
+	 *
+	 * Here we check the post type that we are in and then if it's 'woocommerce-author' or 'product' then we register
+	 * our meta boxes for those post types
+	 *
+	 * @param $post_type string type of the post we are editing
+	 *
+	 * @return void
+	 * @access public
+	 *
+	 *
+	 */
+    function create_woocommerce_author_info_metabox($post_type):void {
 
         if ( 'woocommerce-author' == $post_type ){
 
@@ -51,31 +79,33 @@ class wooa_meta_boxes
 
         }
 
-
-
     }
 
 
-
-    function render_woocommerce_author_info_metabox(){
-
-
+	/**
+	 *
+	 * Render 'woocommerce-author' post type meta box
+	 *
+	 * Here we first get current post meta data to pass them to our inputs , then we will create multiple inputs by
+	 * using 'wooa_admin_input' class functions
+	 *
+	 * @see wooa_admin_inputs::render_admin_input()
+	 *
+	 * @return void
+	 * @access public
+	 *
+	 */
+    function render_woocommerce_author_info_metabox():void{
 
         $values = isset($_GET['post']) && $_GET['post'] != ''  ? get_post_meta( $_GET['post']  ) : [];
 
-
-
-
-
         wp_nonce_field( 'wooa_author_info_metabox', 'wooa_author_info_metabox' );
-
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'check_elementor',
             )
         );
-
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
@@ -89,7 +119,6 @@ class wooa_meta_boxes
             )
         );
 
-
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'textbox',
@@ -101,7 +130,6 @@ class wooa_meta_boxes
                 'value' => isset($values['wooa_author_name']) && $values['wooa_author_name'][0] != '' ? $values['wooa_author_name'][0] : ''
             )
         );
-
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
@@ -115,7 +143,6 @@ class wooa_meta_boxes
             )
         );
 
-
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'select',
@@ -128,7 +155,6 @@ class wooa_meta_boxes
             )
         );
 
-
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'textbox',
@@ -140,7 +166,6 @@ class wooa_meta_boxes
                 'value' => isset($values['wooa_author_city']) && $values['wooa_author_city'][0] != '' ? $values['wooa_author_city'][0] : ''
             )
         );
-
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
@@ -155,7 +180,6 @@ class wooa_meta_boxes
             )
         );
 
-
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'email',
@@ -167,8 +191,6 @@ class wooa_meta_boxes
                 'value' => isset($values['wooa_author_email_address']) && $values['wooa_author_email_address'][0] != '' ? $values['wooa_author_email_address'][0] : ''
             )
         );
-
-
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
@@ -182,7 +204,6 @@ class wooa_meta_boxes
             )
         );
 
-
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'url',
@@ -194,7 +215,6 @@ class wooa_meta_boxes
                 'value' => isset($values['wooa_author_dribble_url']) && $values['wooa_author_dribble_url'][0] != '' ? $values['wooa_author_dribble_url'][0] : ''
             )
         );
-
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
@@ -208,8 +228,6 @@ class wooa_meta_boxes
             )
         );
 
-
-
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'url',
@@ -221,8 +239,6 @@ class wooa_meta_boxes
                 'value' => isset($values['wooa_author_twitter_url']) && $values['wooa_author_twitter_url'][0] != '' ? $values['wooa_author_twitter_url'][0] : ''
             )
         );
-
-
 
         $this->wooa_admin_inputs->render_admin_input(
             array(
@@ -236,8 +252,6 @@ class wooa_meta_boxes
             )
         );
 
-
-
         $this->wooa_admin_inputs->render_admin_input(
             array(
                 'type'=>'textarea',
@@ -250,14 +264,22 @@ class wooa_meta_boxes
             )
         );
 
-
-
     }
 
 
 
-
-    public function render_woocommerce_assign_author_metabox(){
+	/**
+	 *
+	 * Render 'product' post type meta box
+	 *
+	 * Here we first get current post meta data to pass them to our inputs , then we will create multiple inputs by
+	 * using 'wooa_admin_input' class functions
+	 *
+	 * @return void
+	 * @access public
+	 *
+	 */
+    public function render_woocommerce_assign_author_metabox():void{
 
         $value = isset($_GET['post']) && $_GET['post'] != ''  ? get_post_meta( $_GET['post'] , 'wooa_product_author_id' , true  ) : '';
 
@@ -280,7 +302,20 @@ class wooa_meta_boxes
 
 
 
-
+	/**
+	 *
+	 * save 'woocommerce-author' post type meta box values
+	 *
+	 * First validate our nonce field and then loop through an array of the items which should be saved as meta data
+	 * for current post , if the value is set we will update the post update , otherwise we will delete that specific
+	 * post meta data
+	 *
+	 * @param $post_id int ID of the post we are currently saving
+	 *
+	 * @return void
+	 * @access public
+	 *
+	 */
     public function save_woocommerce_author_info_metabox($post_id){
 
         if( !isset( $_POST['wooa_author_info_metabox'] ) || !wp_verify_nonce( $_POST['wooa_author_info_metabox'],'wooa_author_info_metabox') ){
@@ -311,9 +346,6 @@ class wooa_meta_boxes
             'wooa_author_poster',
         );
 
-
-
-
         foreach ($items_to_save as $item){
 
             if( !is_null($_POST[$item] ) && $_POST[$item] != '' ){
@@ -328,13 +360,24 @@ class wooa_meta_boxes
 
         }
 
-
-
-
     }
 
 
 
+	/**
+	 *
+	 * save 'product' post type meta box values
+	 *
+	 * First validate our nonce field and then loop through an array of the items which should be saved as meta data
+	 * for current post , if the value is set we will update the post update , otherwise we will delete that specific
+	 * post meta data
+	 *
+	 * @param $post_id int ID of the post we are currently saving
+	 *
+	 * @return void
+	 * @access public
+	 *
+	 */
     function save_woocommerce_assign_author_metabox($post_id){
 
         if( !isset( $_POST['wooa_assign_author_metabox'] ) || !wp_verify_nonce( $_POST['wooa_assign_author_metabox'],'wooa_assign_author_metabox') ){
@@ -375,6 +418,11 @@ class wooa_meta_boxes
 }
 
 
+/**
+ *
+ * Check if we are in admin panel and then create a clone of 'wooa_meta_boxes' class
+ *
+ */
 
 if ( is_admin() ) {
 
