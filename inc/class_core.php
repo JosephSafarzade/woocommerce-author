@@ -60,6 +60,12 @@ class wooa_core
 	 */
     function check_if_author_exist( string $author_name ) : int {
 
+		if(strpos($author_name,"-") > 0 ){
+
+			$author_name =str_replace("-"," " , $author_name );
+
+		}
+
         $args = array(
             'post_type'  => 'woocommerce-author',
             'fields' => 'ids',
@@ -808,7 +814,6 @@ class wooa_core
 
     function return_author_description_by_id($author_id){
 
-
         $author_description = get_post_meta($author_id , 'wooa_author_description' , true );
 
         return  $author_description != '' && $author_description != false ?  esc_attr( $author_description ) : false ;
@@ -818,7 +823,6 @@ class wooa_core
 
 
     function return_author_email_by_id($author_id){
-
 
         $author_email_address = get_post_meta($author_id , 'wooa_author_email_address' , true );
 
@@ -867,11 +871,16 @@ class wooa_core
 
 		        $is_correct_url_structure_loaded = $this->check_for_right_url_structure( $current_url );
 
+
 		        if ( $is_correct_url_structure_loaded ) {
 
 			        $author_name = basename($current_url);
 
+
+
 			        $author_id = $this->check_if_author_exist ( $author_name );
+
+
 
 			        if( $author_id != 0 ){
 
@@ -1015,6 +1024,7 @@ class wooa_core
 
     function return_author_id($author_id){
 
+
         if(is_array($author_id)){
 
             $author_id = $author_id[0];
@@ -1101,6 +1111,7 @@ class wooa_core
                     $product = new WC_Product($product_id);
 
                 $product_data = array(
+					'id'    => $product_id,
                     'title' => $product->get_title(),
                     'url' => $product->get_permalink(),
                     'regular_price' => $product->get_regular_price(),
@@ -1134,9 +1145,32 @@ class wooa_core
 
     static public function generate_single_product_box_html($product_data){
 
-        require (WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-single-product-box.php');
+		$theme_template_file_path = locate_template('woocommerce-author/wooa-single-product-box.php');
+
+	    if(  $theme_template_file_path != '' ) {
+
+		    get_template_part ('woocommerce-author/wooa-single-product-box','',array('product_id'=>$product_data['id']));
+
+
+	    } else {
+
+		    require (WOOA_PLUGIN_TEMPLATE_DIR . DIRECTORY_SEPARATOR . 'wooa-single-product-box.php');
+
+
+	    }
+
 
     }
+
+
+
+
+	function wooa_return_author_profile_picture_url($author_id){
+
+
+		return get_the_post_thumbnail_url($author_id,'full');
+
+	}
 
 
 

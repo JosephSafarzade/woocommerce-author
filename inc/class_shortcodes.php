@@ -501,7 +501,7 @@ class wooa_shortcodes
         $atts = shortcode_atts( array(
             'author_id' => apply_filters('wooa_return_author_id','0' ),
             'products_columns'=>'5',
-            'products_count'=>'10',
+            'products_count'=>'-1',
             'title_tag' => 'h5'
         ), $atts, 'wooa_show_author_products' );
 

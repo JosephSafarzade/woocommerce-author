@@ -72,6 +72,8 @@ class wooa_hooks
 
         add_filter('wooa_return_author_id' , array($this->wooa_core , 'return_author_id') , 10 , 1 );
 
+		add_filter('wooa_return_author_profile_picture_url' ,  array($this->wooa_core , 'wooa_return_author_profile_picture_url') ,10 , 1 );
+
     }
 
 
